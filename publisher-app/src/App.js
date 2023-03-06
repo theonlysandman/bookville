@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'
 import logo from './bookville_logo.png'
 import Footer from "./Footer"
 //import PublisherBookForm from "./PublisherBookForm"
-import { BiblioshareAPI } from ".//apis/BiblioshareAPI"
+import { BiblioshareAPI } from "./apis/BiblioshareAPI"
 import { Route, Routes } from "react-router-dom"
 import { Freehand } from "./Freehand"
 import { PublisherBrand } from "./PublisherBrand"
@@ -102,7 +102,7 @@ function App() {
                 {book && <div>{book.Contributor.PersonName._text}</div>}
                 {book.RecordSourceName && <div>Published By: {book.Imprint.ImprintName._text}</div>}
                 {book && <div>Product Form Details: {book.ProductFormDetail._text}</div>}
-                {book && <div>Price: {book.SupplyDetail.Price[0].PriceAmount._text} {book.SupplyDetail.Price[0].CurrencyCode._text}</div> }
+                {book.SupplyDetail && <div>Price: {book.SupplyDetail.Price[0].PriceAmount._text} {book.SupplyDetail.Price[0].CurrencyCode._text}</div> }
 
                 {book &&
                     <div id="checkbox-section">

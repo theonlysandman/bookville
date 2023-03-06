@@ -1,6 +1,6 @@
 // JavaScript source code
-import { api } from "./configs\\biblioshareConfig"
-import { defineCancelApiObject } from "./configs\\biblioshareUtils"
+import { api } from "./configs/biblioshareConfig"
+import { defineCancelApiObject } from "./configs/biblioshareUtils"
 
 export const BiblioshareAPI = {
     getBookDetails: async function (token, isbm, cancel=false) {
