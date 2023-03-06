@@ -6,7 +6,7 @@ import { notification } from "antd"
 
 
 export const api = axios.create({
-    baseURL: "http://www.biblioshare.org/BNCServices/BNCServices.asmx/ONIX",
+    baseURL: "https://www.biblioshare.ca/BNCServices/BNCServices.asmx/ONIX",
 })
 
 // defining a custom error handler for all APIs
