@@ -7,21 +7,41 @@
   pointer-events: none;
 }
 
+.logo {
+    height: 270px;
+    width: 480px;
+}
+
+#checkbox-section {
+    margin-top: 20px;
+}
+
+#debug-section {
+    margin-top:20px;
+    font-size: 12px;
+    border: 1px;
+    border-color: black;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
+.publisher {
+    background-color:#EDEDED;
+}
+
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #EDEDED;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
