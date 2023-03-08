@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+    text-align: center;
+    background-color: #EDEDED;
 }
 
 .App-logo {
@@ -20,6 +21,10 @@
     margin: 10px 0px;
 }
 
+.form-section {
+    margin: 20px 0px;
+}
+
 #checkbox-section {
     margin-top: 20px;
 }
@@ -29,6 +34,10 @@
     font-size: 12px;
     border: 1px;
     border-color: black;
+}
+
+.text-field {
+    background-color: #DE5147;
 }
 
 @media (prefers-reduced-motion: no-preference) {

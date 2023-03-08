@@ -3,7 +3,15 @@ import { useState } from 'react'
 import './App.css'
 import Header from './components/Header'
 
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import TextField from '@mui/material/TextField'
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox'
+
+
 import logo from './bookville_logo.png'
 import Footer from "./Footer"
 //import PublisherBookForm from "./PublisherBookForm"
@@ -15,14 +23,11 @@ import { PublisherBrand } from "./PublisherBrand"
 import { useParams } from "react-router-dom"
 
 
+import placeholder from './assets/bookville_logo.png'
+
+
 function App() {
 
-    //example url https://www.biblioshare.org/BNCServices/BNCServices.asmx/ONIX?Token=he7ke8hocc4tds1b&EAN=9781550819113
-    //axios.get('https://www.biblioshare.org/BNCServices/BNCServices.asmx/ONIX?token=he7ke8hocc4tds1b')
-    //    .then(res)
-
-    //& EAN=${ encodeURIComponent(request_data.EAN)
-    //const convert = require("xml-js");
     const [book, setBook] = useState('')
     const [error , setError] = useState('')
     const [ean, setEan] = useState('')
@@ -32,18 +37,20 @@ function App() {
     console.log(id)
     var convert = require('xml-js');
 
+    function removeHTMLTags(str) {
+        return str.replace(/<[^>]*>/g, '');
+    }
 
-    const [checked, setChecked] = useState(false);
+    function removeAngleBrackets(str) {
+        var str1 = str.replace(/&lt;p&gt;/g, '');
+        var str2 = str1.replace(/&lt;strong&gt;/g, '');
+        var str3 = str2.replace(/&lt;\/strong&gt;/g, '');
+        var str4 = str3.replace(/&lt;\/p&gt;/g, '');
+        var str5 = str4.replace(/&lt;br&gt;/g, '');
+        var str6 = str5.replace(/&lt;\/?em&gt;/g, '');
+        return str6
+    }
 
-    const handleChange = () => {
-        setChecked(!checked);
-    };
-
-
-    const request_data = { token: "he7ke8hocc4tds1b", EAN: "9781550819113" };
-    const quote_url = 'https://api.quotable.io/random';
-    const biblioshare_url = 'https://www.biblioshare.org/BNCServices/BNCServices.asmx/ONIX';
-    const url = biblioshare_url;
 
     const getBookDetails = (event: FormEvent) => { 
         event.preventDefault();
@@ -68,7 +75,6 @@ function App() {
       
             }
             
-
         }).catch(err => {
                 console.log(err);
          })
@@ -80,41 +86,127 @@ function App() {
                 <Routes>
                     <Route path="/" />
                     <Route path="/freehand" element={<Freehand />} />
-
                     <Route path="/publisher" element={<PublisherBrand />}>
                         <Route path=":id" element={<PublisherBrand />} />
                     </Route>
                 </Routes>
 
-            <Header/>
-        <div className="publisher">
-              <form id="ean" onSubmit={getBookDetails} >
-                      <input type="text" placeholder="Enter EAN" onChange={(e) => setEan(e.target.value)} ></input>
-                      <Button type="submit" variant="contained">Get ONIX Data</Button>
-            </form>
-             {/*<PublisherBookForm />*/}
+                <Header />
 
+                <div><h1>Publisher Title Nomination</h1></div>
+                <div class="form-seperator">LPG Member Info</div>
+                <Grid container spacing={2} >
+                    <Grid container item xs={6} direction="column" >
+                        <TextField label="Publisher" value=""/>
+                        <TextField label="Imprint"/>
+                        <TextField label="Your Name" />
+                        <TextField label="Your Email" />
+                    </Grid>
+                    <Grid container item xs={6} direction="column" >
+                        <img src="assests/logo-placeholder.png}" />
+                    </Grid>
+                </Grid>
 
-              <div class="form-seperator">LPG Member Info</div>
-              <div>
-                        {/*console.log("Here = " +book.SupplyDetail.Price)*/}
+            <div className="publisher">
+                    <div class="form-seperator">{book ? <div>{book.Title.TitleText._text }</div> : <div>Title not set</div>}</div>
+                    <div>
+                        <div class="form-section">
+                           <Grid container spacing={14} >
+                                <Grid container item xs={6} direction="column" >
+                                    <TextField label="Subtitle" value="My creepy subtitle" />
+                                    <TextField label="Publication Year" />
+                                    <TextField label="Contributors" />
+                                </Grid>
+                                <Grid container item xs={6} direction="column">
+                                        <TextField label="ISBN" />
+                                        <TextField label="Price" />
+                                        <TextField label="Contributors Hometown" />
+                                </Grid>
+                            </Grid>
+                     </div>              
 
-                {book.hasOwnProperty('Publisher')
-                    ? <div>Publisher: {book.Publisher.PublisherName._text}</div>
-                    : <div>Publisher: None Available</div>
-                }
+                        <div class="form-section">
+                            <Grid container spacing={4} >
+                                <Grid container item xs={12} direction="column" >
+                                    <TextField label="Main Description" />
+                                    <TextField label="Short Description" />
+                                </Grid>
+                            </Grid>
+                        </div>
+
+                        <div class="form-section">
+                            <Grid container spacing={14} >
+                                <Grid container item xs={6} direction="column" >
+                                    <TextField label="Subject (BISAC) :" />
+                                </Grid>
+                                <Grid container item xs={6} direction="column">
+                                    <TextField label="Region (BISAC)" />
+                                </Grid>
+                            </Grid>
+                        </div>
+
+                        <div class="form-section">
+                            <Grid container spacing={14} >
+                                <Grid container item xs={4} direction="column" >
+                                    <span>Additional Location Relevance</span><br /><span>(Check all that apply)</span>
+                                    <FormGroup>
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Contributor" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Theme" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Subject" />
+                                    </FormGroup>
+                                </Grid>
+                                <Grid container item xs={4} direction="column">
+                                    <FormGroup>
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 1 -- Rural Yukon & NWT" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 2 -- Northern Alberta" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 3 -- Northern Saskatchewan" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 4 -- - Rural Central Ontario" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 5 -- Rural Newfoundland & Labrador" />
+                                    </FormGroup>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        <div class="paid-form-section">
+                            <Grid container spacing={14} >
+                                <Grid container item xs={6} direction="column" >
+                                    <FormGroup>
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Campaign Enrollment" />
+                                    </FormGroup>
+                                </Grid>
+                                <Grid container item xs={6} direction="column">
+                                    <span>Enhancement(s) $50 per zone</span>
+                                    <FormGroup>
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 1" labelPlacement="start" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 2" labelPlacement="start" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 3" labelPlacement="start" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 4" labelPlacement="start" />
+                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 5" labelPlacement="start" />
+                                    </FormGroup>
+                                </Grid>
+                            </Grid>
+                        </div>
+                        <div>
+                            <Button variant="contained">Submit Request</Button>
+                        </div>
+
+                        <form id="ean" onSubmit={getBookDetails} >
+                            <input type="text" placeholder="Enter EAN" onChange={(e) => setEan(e.target.value)} ></input>
+                            <Button type="submit" variant="contained">Get ONIX Data</Button>
+                        </form>
+
 
                 {book.hasOwnProperty('Imprint')
                     ? <div>ImprintName: {book.Imprint.ImprintName._text}</div>
                     : <div>ImprintName: None Available</div>
                 }
-                
+               </div> 
+                    <div class="form-seperator">{book && <div>Title</div>}
 
 
-                <div class="form-seperator">{book && <div>{book.Title.TitleText._text}</div>}
-                </div>
-                        <div>ISBN = { ean } </div>
-             {error && <p>{error}</p>}
+
+               
+                <div>ISBN = { ean } </div>
+                {error && <p>{error}</p>}
                 {book.hasOwnProperty('Subtitle')
                             ? <div>Subtitle: {book.Subtitle._text}</div>
                             : <div>Subtitle: None Available</div>
@@ -122,14 +214,15 @@ function App() {
                 {book && <div>By</div>}
                 {book && <div>{book.Contributor.PersonName._text}</div>}
 
+                        {book.hasOwnProperty('OtherText')
+
+                        }
 
                         
                {book.hasOwnProperty('OtherText')
-                            ? <div>Main Description: {book.OtherText[0].Text._text}</div>
+                            ? <div>Main Description: {removeAngleBrackets(book.OtherText[0].Text._text)}</div>
                             : <div>Main Description: None Available</div>
                 }
-
-                
 
                
                 {book.hasOwnProperty('SupplyDetail')
@@ -156,15 +249,7 @@ function App() {
                         
 
                 
-                {book &&
-                    <div id="checkbox-section">
-                        <Checkbox
-                            label="Apply For Enhancement"
-                            value={checked}
-                            onChange={handleChange}
-                        />
-                    </div>
-                }
+          
                 </div>
                 <div id="debug-section">
                     <p>Below here is for debugging</p>
@@ -179,14 +264,6 @@ function App() {
   );
 }
 
-const Checkbox = ({ label, value, onChange }) => {
-    return (
-        <label>
-            <input type="checkbox" checked={value} onChange={onChange} />
-            {label}
-        </label>
-    );
-};
 
 export default App;
 
