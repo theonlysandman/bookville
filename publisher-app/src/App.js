@@ -194,15 +194,45 @@ function App() {
 								</Grid>
 								<Grid container item xs={6} direction="column">
 									<TextField label="ISBN" value={ean} />
-									<TextField
+
+									{/* code for price in array format */}
+									{book.hasOwnProperty("SupplyDetail") &&
+										book?.SupplyDetail?.Price.length >
+											0 && (
+											<TextField
+												label="Price"
+												value={
+													book.hasOwnProperty(
+														"SupplyDetail"
+													) &&
+													book?.SupplyDetail?.Price[0]?.hasOwnProperty(
+														"PriceAmount"
+													)
+														? book?.SupplyDetail
+																?.Price[0]
+																?.PriceAmount
+																?._text
+														: ""
+												}
+											/>
+										)}
+
+									{/* code for price in object format */}
+									{/* <TextField
 										label="Price"
 										value={
-											book.hasOwnProperty("SupplyDetail")
-												? book?.SupplyDetail?.Price[0]
+											book.hasOwnProperty(
+												"SupplyDetail"
+											) &&
+											book?.SupplyDetail?.Price?.hasOwnProperty(
+												"PriceAmount"
+											)
+												? book?.SupplyDetail?.Price
 														?.PriceAmount?._text
 												: ""
 										}
-									/>
+									/> */}
+
 									<TextField label="Contributors Hometown" />
 								</Grid>
 							</Grid>
@@ -375,7 +405,10 @@ function App() {
 							<div>Main Description: None Available</div>
 						)}
 
-						{book.hasOwnProperty("SupplyDetail") ? (
+						{book.hasOwnProperty("SupplyDetail") &&
+						book?.SupplyDetail?.Price[0]?.hasOwnProperty(
+							"PriceAmount"
+						) ? (
 							<div>
 								Price:{" "}
 								{book.SupplyDetail.Price[0].PriceAmount._text}
@@ -410,7 +443,10 @@ function App() {
 							<div>Cover: None Available</div>
 						)}
 
-						{book.hasOwnProperty("SupplyDetail") ? (
+						{book.hasOwnProperty("SupplyDetail") &&
+						book?.SupplyDetail?.Price[0]?.hasOwnProperty(
+							"PriceAmount"
+						) ? (
 							<div>
 								Price:{" "}
 								{book.SupplyDetail.Price[0].PriceAmount._text}
