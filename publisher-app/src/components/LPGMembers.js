@@ -33,6 +33,10 @@ export default function LPGMembers({ book }) {
                   print and digital presence in a single or combination of
                   zones.
               </div>
+              <div >
+                  To review the complete campaign information package <a target='_blank' href="https://www.canva.com/design/DAFaLB6VK7o/5FBLBalIbdUwA9O9gZecJw/view?utm_content=DAFaLB6VK7o&utm_campaign=designshare&utm_medium=link&utm_source=homepage_design_menu#1">CLICK HERE</a>
+
+              </div>
               "
           </div>
 
