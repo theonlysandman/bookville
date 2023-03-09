@@ -1,11 +1,17 @@
 .App {
     text-align: center;
     background-color: #EDEDED;
+    margin-left: auto;
+    height: 100%;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+#sub-header {
+    color: black;
 }
 
 .logo {

@@ -1,54 +1,40 @@
-import { useState } from "react";
+import { useState } from "react"
 import "./App.css";
-import Header from "./components/Header";
+import Results from "./components/Results";
 
 // import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import Search from "./components/Search"
 
 // import logo from "./bookville_logo.png";
 // import Footer from "./Footer";
 //import PublisherBookForm from "./PublisherBookForm"
 
-import { BiblioshareAPI } from "./apis/BiblioshareAPI";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes  } from "react-router-dom";
 import { Freehand } from "./Freehand";
 import { PublisherBrand } from "./PublisherBrand";
+import { BiblioshareAPI } from "./apis/BiblioshareAPI";
 
 import { useParams } from "react-router-dom";
+
 
 // import placeholder from "./assets/bookville_logo.png";
 
 function App() {
 	const [book, setBook] = useState("");
-	const [error, setError] = useState("");
+
 	const [ean, setEan] = useState("");
+
+	const [error, setError] = useState("");
 
 	const { id } = useParams();
 	console.log("Know id?");
 	console.log(id);
 	var convert = require("xml-js");
 
-	function removeHTMLTags(str) {
-		return str.replace(/<[^>]*>/g, "");
-	}
 
-	function removeAngleBrackets(str) {
-		var str1 = str.replace(/&lt;p&gt;/g, "");
-		var str2 = str1.replace(/&lt;strong&gt;/g, "");
-		var str3 = str2.replace(/&lt;\/strong&gt;/g, "");
-		var str4 = str3.replace(/&lt;\/p&gt;/g, "");
-		var str5 = str4.replace(/&lt;br&gt;/g, "");
-		var str6 = str5.replace(/&lt;\/?em&gt;/g, "");
-		return str6;
-	}
 
-	const getBookDetails = (event) => {
-		event.preventDefault();
+	const getBookDetails = (ean) => {
+		
 		console.log(ean);
 		BiblioshareAPI.getBookDetails("he7ke8hocc4tds1b", ean)
 			.then((res) => {
@@ -76,357 +62,18 @@ function App() {
 				console.log(err);
 			});
 	};
+
 	return (
 		<>
 			<div classNameName="App">
 				<Routes>
 					<Route path="/" />
+					<Route path="/search" element={<Search getBookDetails={getBookDetails} setEan={setEan} ean={ean} />} />
+					<Route path="/results/:id" element={<Results getBookDetails={getBookDetails} setEan={setEan} book={book} />} />
 					<Route path="/freehand" element={<Freehand />} />
-					<Route path="/publisher" element={<PublisherBrand />}>
-						<Route path=":id" element={<PublisherBrand />} />
-					</Route>
 				</Routes>
 
-				<Header />
-
-				<div id="subheader">
-					<h1>Publisher Title Nomination</h1>
-					<div id="subheader-text">
-						Welcome (publisher place holder) as a LPG member you may
-						nominate up to 5 titles for enrolment in the campaign,
-						appearing in the print and digital catalogs in all
-						geographic zones. For each title nominated, you may also
-						optionally selected for zone enhancements, a larger
-						print and digital presence in a single or combination of
-						zones.
-					</div>
-					"
 				</div>
-
-				<div id="isbn-search">
-					<form id="ean" onSubmit={getBookDetails}>
-						<input
-							type="text"
-							placeholder="Enter EAN"
-							onChange={(e) => setEan(e.target.value)}
-						></input>
-						<Button type="submit" variant="contained">
-							Get ONIX Data
-						</Button>
-					</form>
-				</div>
-
-				<div id="error-messages">{error && <p>{error}</p>}</div>
-
-				<div className="form-seperator">LPG Member Info</div>
-				<Grid container spacing={2}>
-					<Grid container item xs={6} direction="column">
-						<TextField
-							label="Publisher"
-							value={
-								book.hasOwnProperty("Publisher")
-									? book?.Publisher?.PublisherName?._text
-									: ""
-							}
-						/>
-						<TextField
-							label="Imprint"
-							value={
-								book.hasOwnProperty("Imprint")
-									? book?.Imprint?.ImprintName?._text
-									: ""
-							}
-						/>
-						<TextField label="Your Name" />
-						<TextField label="Your Email" />
-					</Grid>
-					<Grid container item xs={6} direction="column">
-						<img src="assests/logo-placeholder.png}" alt="Logo" />
-					</Grid>
-				</Grid>
-
-				<div classNameName="publisher">
-					<div className="form-seperator">
-						{book ? (
-							<div>
-								{book.hasOwnProperty("Title")
-									? book.Title.TitleText._text
-									: ""}
-							</div>
-						) : (
-							<div>Title not set</div>
-						)}
-					</div>
-					<div>
-						<div className="form-section">
-							<Grid container spacing={14}>
-								<Grid container item xs={6} direction="column">
-									<TextField
-										label="Subtitle"
-										value={
-											book.hasOwnProperty("Subtitle")
-												? book?.Subtitle?._text
-												: ""
-										}
-									/>
-									<TextField
-										label="Publication Year"
-										value={
-											book.hasOwnProperty(
-												"PublicationDate"
-											)
-												? book?.PublicationDate?._text?.slice(
-														0,
-														4
-												  )
-												: ""
-										}
-									/>
-									<TextField
-										label="Contributors"
-										value={
-											book.hasOwnProperty("Contributor")
-												? book?.Contributor?.PersonName
-														?._text
-												: ""
-										}
-									/>
-								</Grid>
-								<Grid container item xs={6} direction="column">
-									<TextField label="ISBN" value={ean} />
-									<TextField
-										label="Price"
-										value={
-											book.hasOwnProperty("SupplyDetail")
-												? book?.SupplyDetail?.Price[0]
-														?.PriceAmount?._text
-												: ""
-										}
-									/>
-									<TextField label="Contributors Hometown" />
-								</Grid>
-							</Grid>
-						</div>
-
-						<div className="form-section">
-							<Grid container spacing={4}>
-								<Grid container item xs={12} direction="column">
-									<TextField
-										label="Main Description"
-										value={
-											book.hasOwnProperty("OtherText")
-												? removeAngleBrackets(
-														book.OtherText[0].Text
-															._text
-												  )
-												: ""
-										}
-									/>
-									<TextField label="Short Description" />
-								</Grid>
-							</Grid>
-						</div>
-
-						<div className="form-section">
-							<Grid container spacing={14}>
-								<Grid container item xs={6} direction="column">
-									<TextField
-										label="Subject (BISAC) :"
-										value={
-											book.hasOwnProperty("MainSubject")
-												? book?.MainSubject
-														?.SubjectHeadingText
-														?._text
-												: ""
-										}
-									/>
-								</Grid>
-								<Grid container item xs={6} direction="column">
-									<TextField label="Region (BISAC)" />
-								</Grid>
-							</Grid>
-						</div>
-
-						<div className="form-section">
-							<Grid container spacing={14}>
-								<Grid container item xs={4} direction="column">
-									<span>Additional Location Relevance</span>
-									<br />
-									<span>(Check all that apply)</span>
-									<FormGroup>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Contributor"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Theme"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Subject"
-										/>
-									</FormGroup>
-								</Grid>
-								<Grid container item xs={4} direction="column">
-									<FormGroup>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 1 -- Rural Yukon & NWT"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 2 -- Northern Alberta"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 3 -- Northern Saskatchewan"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 4 -- - Rural Central Ontario"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 5 -- Rural Newfoundland & Labrador"
-										/>
-									</FormGroup>
-								</Grid>
-							</Grid>
-						</div>
-						<div className="paid-form-section">
-							<Grid container spacing={14}>
-								<Grid container item xs={6} direction="column">
-									<FormGroup>
-										<FormControlLabel
-											control={
-												<Checkbox defaultChecked />
-											}
-											label="Campaign Enrollment"
-										/>
-									</FormGroup>
-								</Grid>
-								<Grid container item xs={6} direction="column">
-									<span>Enhancement(s) $50 per zone</span>
-									<FormGroup>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 1"
-											labelPlacement="start"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 2"
-											labelPlacement="start"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 3"
-											labelPlacement="start"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 4"
-											labelPlacement="start"
-										/>
-										<FormControlLabel
-											control={<Checkbox />}
-											label="Zone 5"
-											labelPlacement="start"
-										/>
-									</FormGroup>
-								</Grid>
-							</Grid>
-						</div>
-						<div>
-							<Button variant="contained">Submit Request</Button>
-						</div>
-
-						{book.hasOwnProperty("Imprint") ? (
-							<div>
-								ImprintName: {book.Imprint.ImprintName._text}
-							</div>
-						) : (
-							<div>ImprintName: None Available</div>
-						)}
-					</div>
-					<div className="form-seperator">
-						{book && <div>Title</div>}
-
-						<div>ISBN = {ean} </div>
-						{book.hasOwnProperty("Subtitle") ? (
-							<div>Subtitle: {book.Subtitle._text}</div>
-						) : (
-							<div>Subtitle: None Available</div>
-						)}
-						{book && <div>By</div>}
-						{book && <div>{book.Contributor.PersonName._text}</div>}
-
-						{book.hasOwnProperty("OtherText")}
-
-						{book.hasOwnProperty("OtherText") ? (
-							<div>
-								Main Description:{" "}
-								{removeAngleBrackets(
-									book.OtherText[0].Text._text
-								)}
-							</div>
-						) : (
-							<div>Main Description: None Available</div>
-						)}
-
-						{book.hasOwnProperty("SupplyDetail") ? (
-							<div>
-								Price:{" "}
-								{book.SupplyDetail.Price[0].PriceAmount._text}
-							</div>
-						) : (
-							<div>Price: None Available</div>
-						)}
-
-						{book && (
-							<div>
-								Product Form Details:{" "}
-								{book.ProductFormDetail._text}
-							</div>
-						)}
-						{book.hasOwnProperty("BASICMainSubject") ? (
-							<div>
-								BASICMainSubject: {book.BASICMainSubject._text}
-							</div>
-						) : (
-							<div>BASICMainSubject: None Available</div>
-						)}
-
-						{book.hasOwnProperty("MediaFile") ? (
-							<div>
-								Cover:{" "}
-								<img
-									src={book.MediaFile.MediaFileLink._text}
-									alt="Media File"
-								/>
-							</div>
-						) : (
-							<div>Cover: None Available</div>
-						)}
-
-						{book.hasOwnProperty("SupplyDetail") ? (
-							<div>
-								Price:{" "}
-								{book.SupplyDetail.Price[0].PriceAmount._text}
-							</div>
-						) : (
-							<div>Price: None Available</div>
-						)}
-					</div>
-					<div id="debug-section">
-						<p>Below here is for debugging</p>
-						<p>Valid EAN: 9781550819113</p>
-						<p>Fall On Your Knees: 9780394281780</p>
-						<p>In-Valid EAN: 9781550819117</p>
-					</div>
-				</div>
-			</div>
 		</>
 	);
 }
