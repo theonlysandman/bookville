@@ -1,7 +1,10 @@
 .App {
     text-align: center;
     background-color: #EDEDED;
-}
+    margin-left: auto;
+    height: 100%;
+
+  }
 
 .App-logo {
   height: 40vmin;
@@ -25,17 +28,7 @@
     border-radius: 25px;
 }
 
-.form-seperator {
-    background-color: #737373;
-    padding: 10px 0px;
-    font-weight: bold;
-    color: white;
-    margin: 10px 0px;
-}
 
-.form-section {
-    margin: 20px 0px;
-}
 
 #checkbox-section {
     margin-top: 20px;
