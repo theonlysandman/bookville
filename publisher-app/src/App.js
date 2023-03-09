@@ -93,7 +93,27 @@ function App() {
 
                 <Header />
 
-                <div><h1>Publisher Title Nomination</h1></div>
+                <div id="subheader">
+                    <h1>Publisher Title Nomination</h1>
+                    <div id="subheader-text">
+                        Welcome (publisher place holder) as a LPG member you may nominate up to 5 titles for enrolment in the campaign,
+                        appearing in the print and digital catalogs in all geographic zones. For each title nominated, you may also
+                        optionally selected for zone enhancements, a larger print and digital presence in a single or combination of
+                        zones.
+                    </div>"
+                </div>
+
+                <div id="isbn-search">
+                    <form id="ean" onSubmit={getBookDetails} >
+                        <input type="text" placeholder="Enter EAN" onChange={(e) => setEan(e.target.value)} ></input>
+                        <Button type="submit" variant="contained">Get ONIX Data</Button>
+                    </form>
+                </div>
+
+                <div id="error-messages">
+                    {error && <p>{error}</p>}
+                </div>
+
                 <div class="form-seperator">LPG Member Info</div>
                 <Grid container spacing={2} >
                     <Grid container item xs={6} direction="column" >
@@ -150,18 +170,18 @@ function App() {
                                 <Grid container item xs={4} direction="column" >
                                     <span>Additional Location Relevance</span><br /><span>(Check all that apply)</span>
                                     <FormGroup>
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Contributor" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Theme" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Subject" />
+                                        <FormControlLabel control={<Checkbox  />} label="Contributor" />
+                                        <FormControlLabel control={<Checkbox  />} label="Theme" />
+                                        <FormControlLabel control={<Checkbox  />} label="Subject" />
                                     </FormGroup>
                                 </Grid>
                                 <Grid container item xs={4} direction="column">
                                     <FormGroup>
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 1 -- Rural Yukon & NWT" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 2 -- Northern Alberta" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 3 -- Northern Saskatchewan" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 4 -- - Rural Central Ontario" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 5 -- Rural Newfoundland & Labrador" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 1 -- Rural Yukon & NWT" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 2 -- Northern Alberta" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 3 -- Northern Saskatchewan" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 4 -- - Rural Central Ontario" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 5 -- Rural Newfoundland & Labrador" />
                                     </FormGroup>
                                 </Grid>
                             </Grid>
@@ -176,11 +196,11 @@ function App() {
                                 <Grid container item xs={6} direction="column">
                                     <span>Enhancement(s) $50 per zone</span>
                                     <FormGroup>
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 1" labelPlacement="start" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 2" labelPlacement="start" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 3" labelPlacement="start" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 4" labelPlacement="start" />
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="Zone 5" labelPlacement="start" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 1" labelPlacement="start" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 2" labelPlacement="start" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 3" labelPlacement="start" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 4" labelPlacement="start" />
+                                        <FormControlLabel control={<Checkbox  />} label="Zone 5" labelPlacement="start" />
                                     </FormGroup>
                                 </Grid>
                             </Grid>
@@ -188,11 +208,6 @@ function App() {
                         <div>
                             <Button variant="contained">Submit Request</Button>
                         </div>
-
-                        <form id="ean" onSubmit={getBookDetails} >
-                            <input type="text" placeholder="Enter EAN" onChange={(e) => setEan(e.target.value)} ></input>
-                            <Button type="submit" variant="contained">Get ONIX Data</Button>
-                        </form>
 
 
                 {book.hasOwnProperty('Imprint')
@@ -206,7 +221,6 @@ function App() {
 
                
                 <div>ISBN = { ean } </div>
-                {error && <p>{error}</p>}
                 {book.hasOwnProperty('Subtitle')
                             ? <div>Subtitle: {book.Subtitle._text}</div>
                             : <div>Subtitle: None Available</div>

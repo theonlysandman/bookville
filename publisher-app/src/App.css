@@ -13,11 +13,23 @@
     width: 480px;
 }
 
+#error-messages {
+    background-color: white;
+    width: 70%;
+    font-size: 20px;
+    color: red;
+    text-align: center;
+    margin: auto;
+    margin-top:10px;
+    width: 50%;
+    border-radius: 25px;
+}
+
 .form-seperator {
     background-color: #737373;
     padding: 10px 0px;
-    font-weight:bold;
-    color:white;
+    font-weight: bold;
+    color: white;
     margin: 10px 0px;
 }
 
