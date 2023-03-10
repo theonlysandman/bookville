@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import FormGroup from "@mui/material/FormGroup";
@@ -71,6 +70,7 @@ export default function Result({ getBookDetails, setEan, book }) {
 		book?.OtherText[0]?.Text?._text
 	)}</p>
    `;
+
 
 		// Send the email
 		//	emailjs.send('service_828erdg', 'template_gwo9djb', templateParams, '-ajVzYm2FgRIQHhAT')
