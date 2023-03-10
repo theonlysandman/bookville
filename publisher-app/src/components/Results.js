@@ -92,10 +92,12 @@ export default function Result({ getBookDetails, setEan, book }) {
 	)}</p>
    `;
 
+		console.log("book ", book?.Title[0]?.TitleText._text);
 		const templateParams = {
 			name: name,
 			email: email,
 			subject: emailSubject,
+			book_title: book?.Title[0]?.TitleText._text,
 			zone1Checkbox: zoneCheckboxes?.zone1,
 			zone2Checkbox: zoneCheckboxes?.zone2,
 			zone3Checkbox: zoneCheckboxes?.zone3,
@@ -114,6 +116,7 @@ export default function Result({ getBookDetails, setEan, book }) {
 			)
 			.then(
 				(result) => {
+					navigate('/success');	
 					console.log(result.text);
 				},
 				(error) => {
