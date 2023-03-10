@@ -3,6 +3,7 @@ import { Grid, TextField, Typography } from "@mui/material";
 import placeholder from "../../src/assets/logo-placeholder.png";
 import { Divider } from "@mui/material";
 import { Image, StyleSheet, Dimensions } from "react-native";
+import "../App.css";
 
 export default function LPGMembers({ book, setEmail, setName }) {
 	const win = Dimensions.get("window");
@@ -21,7 +22,8 @@ export default function LPGMembers({ book, setEmail, setName }) {
 			sx={{
 				width: "90%",
 				color: "white",
-				mt: 4,
+				backgroundColor: "#EDEDED",
+				mt: 0,
 				ml: "60px"
 			}}
 		>
@@ -71,55 +73,37 @@ export default function LPGMembers({ book, setEmail, setName }) {
 			<Grid container spacing={2}>
 				<Grid container item xs={6} direction="column">
 					<TextField
-						label="Publisher"
-						sx={{ mb: 2 }}
-						value={
-							book.hasOwnProperty("Publisher")
-								? book?.Publisher?.PublisherName?._text
-								: ""
-						}
-					/>
-					<TextField
-						label="Imprint"
-						sx={{ mb: 2 }}
-						value={
-							book.hasOwnProperty("Imprint")
-								? book?.Imprint?.ImprintName?._text
-								: ""
-						}
-					/>
-					<TextField
 						name="your"
+						className="editable"
 						label="Your Name"
 						sx={{ mb: 2 }}
 						onChange={(e) => setName(e.target.value)}
 					/>
 					<TextField
 						label="Email"
+						className="editable"
 						sx={{ mb: 2 }}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
+					<TextField label="ISBN" sx={{ mr: 4 }} value={
+						book.hasOwnProperty("RecordReference")
+							? book?.RecordReference._text
+							: ""
+					} />
+
 				</Grid>
 
 				<Grid container item xs={2} direction="column">
 					{/* add image here */}
 				</Grid>
 			</Grid>
-			<Divider
-				orientation="horizontal"
-				variant="middle"
-				sx={{
-					width: "100%",
-					height: "2px",
-					backgroundColor: "#B31D0C",
-					margin: "0 auto",
-					textAlign: "left",
-					marginTop: "20px"
-				}}
-			/>
+
 		</Box>
 	);
 }
+
+
+
 
 
 //<Image

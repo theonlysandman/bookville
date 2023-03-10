@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import { Grid, TextField, Typography } from "@mui/material";
 import { FormControlLabel, FormGroup } from "@mui/material";
 import { Checkbox } from "@mui/material";
-
+import { Divider } from "@mui/material";
 
 export default function Section1({ book }) { 
 
@@ -45,7 +45,7 @@ export default function Section1({ book }) {
               >
                   {
                       book.hasOwnProperty("Title")
-                          ? book?.Title[0]?.TitleText._text
+                          ? book?.Title?.TitleText._text
                           : ""
                   }
               </Typography>
@@ -55,11 +55,6 @@ export default function Section1({ book }) {
                       <Grid container item direction="column">
                           {/* grid to show the ISBN, Pub Year and Price in a row */}
                           <Grid container item xs={12} direction="row">
-                              <TextField label="ISBN" sx={{ mr: 4 }} value={
-                                  book.hasOwnProperty("RecordReference")
-                                      ? book?.RecordReference._text
-                                      : ""
-                              } />
                               <TextField label="Pub Year" sx={{ mr: 4 }} value={
                                   book.hasOwnProperty(
                                       "PublicationDate"
@@ -110,8 +105,6 @@ export default function Section1({ book }) {
                           } />
                       </Grid>
 
-
-
                       <Grid container item xs={12} direction="column">
                           <TextField label="Main Description" sx={{ mb: 2 }} value={
                               book.hasOwnProperty("OtherText")
@@ -121,11 +114,36 @@ export default function Section1({ book }) {
                                   )
                                   : ""
                           } />
-                          <TextField label="Short Description" />
+
+                      </Grid>
+
+                      <Divider
+                          orientation="horizontal"
+                          variant="middle"
+                          sx={{
+                              width: "100%",
+                              height: "2px",
+                              backgroundColor: "#FFCCCB",
+                              margin: "0 auto 40px",
+                              textAlign: "left",
+                              marginTop: "20px"
+                          }}
+                      />
+
+
+                      <Grid container item xs={12} direction="column">
+                          <TextField
+                              className="editable"
+                              label="Short Description"
+                          />
                       </Grid>
 
                       <Grid container item xs={12} direction="column">
-                          {<TextField label="Additional Publisher Notes" sx={{ mb: 2 }} />}
+                          {<TextField
+                              label="Additional Publisher Notes"
+                              sx={{ mb: 2 }}
+                              className="editable"
+                          />}
                       </Grid>
 
                   </Grid>

@@ -3,8 +3,9 @@ import "./App.css";
 import Results from "./components/Results";
 import Search from "./components/Search"
 import Success from "./components/Success"
+import SearchError from "./components/SearchError"
 
-
+import { useNavigate } from "react-router-dom";
 import { Route, Routes  } from "react-router-dom";
 import { Freehand } from "./Freehand";
 import { PublisherBrand } from "./PublisherBrand";
@@ -17,10 +18,9 @@ import { useParams } from "react-router-dom";
 
 function App() {
 	const [book, setBook] = useState("");
-
 	const [ean, setEan] = useState("");
-
 	const [error, setError] = useState("");
+	const navigate = useNavigate();
 
 	const { id } = useParams();
 	console.log("Know id?");
@@ -40,11 +40,10 @@ function App() {
 				});
 
 				console.log("got JS response");
+
 				const book_json_parsed = JSON.parse(book_json);
-				console.log(book_json_parsed);
 
 				if (book_json_parsed.Product) {
-					console.log("product found");
 					console.log(book_json_parsed.Product.Title.TitleText);
 					setBook(book_json_parsed.Product);
 					setError("");
@@ -52,6 +51,7 @@ function App() {
 					console.log("invalid EAN");
 					setError("Invalid EAN! What are you a hacker?");
 					setBook("");
+					navigate('/searcherror/')
 				}
 			})
 			.catch((err) => {
@@ -65,6 +65,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Search getBookDetails={getBookDetails} setEan={setEan} ean={ean} />} />
 					<Route path="/success" element={<Success />} />
+					<Route path="/searcherror" element={<SearchError ean={ean} />} />
 					<Route path="/search" element={<Search getBookDetails={getBookDetails} setEan={setEan} ean={ean} />} />
 					<Route path="/results/:id" element={<Results getBookDetails={getBookDetails} setEan={setEan} book={book} />} />
 					<Route path="/freehand" element={<Freehand />} />

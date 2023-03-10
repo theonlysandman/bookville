@@ -97,7 +97,7 @@ export default function Result({ getBookDetails, setEan, book }) {
 			name: name,
 			email: email,
 			subject: emailSubject,
-			book_title: book?.Title[0]?.TitleText._text,
+			book_title: book?.Title?.TitleText._text,
 			zone1Checkbox: zoneCheckboxes?.zone1,
 			zone2Checkbox: zoneCheckboxes?.zone2,
 			zone3Checkbox: zoneCheckboxes?.zone3,
@@ -128,16 +128,18 @@ export default function Result({ getBookDetails, setEan, book }) {
 	return (
 		<>
 			<Header />
-			<form onSubmit={handleSubmit}>
-				<LPGMembers book={book} setEmail={setEmail} setName={setName} />
-				<Section1 book={book} />
-				<Campaign
-					book={book}
-					submitNomination={submitNomination}
-					setzoneCheckboxes={setzoneCheckboxes}
-					zoneCheckboxes={zoneCheckboxes}
-				/>
-			</form>
+			<div id="resultsPage">
+				<form onSubmit={handleSubmit}>
+					<LPGMembers book={book} setEmail={setEmail} setName={setName} />
+					<Section1 book={book} />
+					<Campaign
+						book={book}
+						submitNomination={submitNomination}
+						setzoneCheckboxes={setzoneCheckboxes}
+						zoneCheckboxes={zoneCheckboxes}
+					/>
+				</form>
+			</div>
 			{/* <Footer /> */}
 			<div id="error-messages">{error && <p>{error}</p>}</div>
 		</>

@@ -17,18 +17,6 @@ export default function Campaign({
 }) {
 	return (
 		<div>
-			<Divider
-				orientation="horizontal"
-				variant="middle"
-				sx={{
-					width: "90%",
-					height: "2px",
-					backgroundColor: "#B31D0C",
-					margin: "0 auto",
-					textAlign: "left",
-					marginBottom: "10px"
-				}}
-			/>
 			<Grid
 				container
 				alignItems="center"
