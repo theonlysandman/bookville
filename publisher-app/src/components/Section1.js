@@ -55,7 +55,11 @@ export default function Section1({ book }) {
                       <Grid container item direction="column">
                           {/* grid to show the ISBN, Pub Year and Price in a row */}
                           <Grid container item xs={12} direction="row">
-                              <TextField label="Pub Year" sx={{ mr: 4 }} value={
+                            <TextField
+                              disabled
+                              label="Pub Year"
+                              sx={{ mr: 4 }}
+                              value={
                                   book.hasOwnProperty(
                                       "PublicationDate"
                                   )
@@ -86,23 +90,32 @@ export default function Section1({ book }) {
                       <Grid container item xs={12} direction="column">
                           {/* Grid for contributor(s) and HomeTown to show in a single line  */}
                           <Grid container item xs={12} direction="row">
-                              <TextField label="Contributor(s)" sx={{ mr: 6 }} value={
+                            <TextField
+                              disabled
+                              label="Contributor(s)"
+                              sx={{ mr: 6 }}
+                              value={
                                   book.hasOwnProperty("Contributor")
                                       ? book?.Contributor?.PersonName?._text
                                       : ""
-                              } />
+                              }
+                           />
                              {/* <TextField label="HomeTown" sx={{ mr: 4 }} />*/}
                           </Grid>
                       </Grid>
 
                       <Grid container item xs={6} direction="column">
-                          <TextField label="Subject (BISAC) " value={
+                        <TextField
+                          disabled
+                          label="Subject (BISAC) "
+                          value={
                               book.hasOwnProperty("MainSubject")
                                   ? book?.MainSubject
                                       ?.SubjectHeadingText
                                       ?._text
                                   : "No data found"
-                          } />
+                          }
+                        />
                       </Grid>
 
                       <Grid container item xs={12} direction="column">
@@ -130,20 +143,20 @@ export default function Section1({ book }) {
                           }}
                       />
 
-
                       <Grid container item xs={12} direction="column">
-                          <TextField
+                            <TextField
+                              required
                               className="editable"
                               label="Short Description"
-                          />
+                            />
                       </Grid>
 
                       <Grid container item xs={12} direction="column">
-                          {<TextField
-                              label="Additional Publisher Notes"
-                              sx={{ mb: 2 }}
-                              className="editable"
-                          />}
+                        <TextField
+                          label="Additional Publisher Notes"
+                          sx={{ mb: 2 }}
+                          className="editable"
+                        />
                       </Grid>
 
                   </Grid>

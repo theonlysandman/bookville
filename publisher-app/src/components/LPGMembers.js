@@ -73,6 +73,7 @@ export default function LPGMembers({ book, setEmail, setName }) {
 			<Grid container spacing={2}>
 				<Grid container item xs={6} direction="column">
 					<TextField
+						required
 						name="your"
 						className="editable"
 						label="Your Name"
@@ -80,6 +81,7 @@ export default function LPGMembers({ book, setEmail, setName }) {
 						onChange={(e) => setName(e.target.value)}
 					/>
 					<TextField
+						required
 						label="Email"
 						className="editable"
 						sx={{ mb: 2 }}
