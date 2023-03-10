@@ -1,13 +1,9 @@
 import { useState } from "react"
 import "./App.css";
 import Results from "./components/Results";
-
-// import Box from "@mui/material/Box";
 import Search from "./components/Search"
+import Success from "./components/Success"
 
-// import logo from "./bookville_logo.png";
-// import Footer from "./Footer";
-//import PublisherBookForm from "./PublisherBookForm"
 
 import { Route, Routes  } from "react-router-dom";
 import { Freehand } from "./Freehand";
@@ -68,6 +64,7 @@ function App() {
 			<div classNameName="App">
 				<Routes>
 					<Route path="/" element={<Search getBookDetails={getBookDetails} setEan={setEan} ean={ean} />} />
+					<Route path="/success" element={<Success />} />
 					<Route path="/search" element={<Search getBookDetails={getBookDetails} setEan={setEan} ean={ean} />} />
 					<Route path="/results/:id" element={<Results getBookDetails={getBookDetails} setEan={setEan} book={book} />} />
 					<Route path="/freehand" element={<Freehand />} />

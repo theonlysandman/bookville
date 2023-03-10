@@ -14,11 +14,13 @@ import Campaign from "./Campaign";
 import Section1 from "./Section1";
 import LPGMembers from "./LPGMembers";
 import emailjs from "@emailjs/browser";
+import { useNavigate } from "react-router-dom";
 
 export default function Result({ getBookDetails, setEan, book }) {
 	const { id } = useParams();
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
+
 	const [zoneCheckboxes, setzoneCheckboxes] = useState({
 		zone1: false,
 		zone2: false,
@@ -28,11 +30,17 @@ export default function Result({ getBookDetails, setEan, book }) {
 		enrollment: false
 	});
 
+	const navigate = useNavigate();
+
+	function resultsRedirect(ean) {
+		navigate(`/success/${ean}`);
+	}
+
+
 	const [error, setError] = useState("");
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		alert(`Handle Submit`);
 		console.log(event.target);
 		console.log(event.target.your);
 	};
@@ -40,6 +48,9 @@ export default function Result({ getBookDetails, setEan, book }) {
 	useEffect(() => {
 		getBookDetails(id);
 	}, []);
+
+
+
 
 	function removeHTMLTags(str) {
 		return str.replace(/<[^>]*>/g, "");
