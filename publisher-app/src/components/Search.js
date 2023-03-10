@@ -4,6 +4,7 @@ import "./Header.css";
 import Button from "@mui/material/Button";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer"
 
 
 
@@ -35,14 +36,17 @@ export default function Search({ getBookDetails, setEan, ean }) {
                 <form id="ean" onSubmit={ () => resultsRedirect(ean)}>
                     <input
                         type="text"
-                        placeholder="Enter EAN"
+                        placeholder="Enter ISBN"
                         onChange={(e) => setEan(e.target.value)}
                     ></input>
                     <Button type="submit" variant="contained">
                         Get ONIX Data
                     </Button>
+
+                    <div id="no-isbn">No ISBN, no problem email Alex. </div>
                 </form>
             </div>
+            <Footer />
             </>
         )
 }

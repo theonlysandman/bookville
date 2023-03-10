@@ -67,7 +67,7 @@ function App() {
 		<>
 			<div classNameName="App">
 				<Routes>
-					<Route path="/" />
+					<Route path="/" element={<Search getBookDetails={getBookDetails} setEan={setEan} ean={ean} />} />
 					<Route path="/search" element={<Search getBookDetails={getBookDetails} setEan={setEan} ean={ean} />} />
 					<Route path="/results/:id" element={<Results getBookDetails={getBookDetails} setEan={setEan} book={book} />} />
 					<Route path="/freehand" element={<Freehand />} />

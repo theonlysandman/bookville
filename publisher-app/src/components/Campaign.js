@@ -3,10 +3,12 @@ import { Typography, Grid, FormControlLabel, FormGroup, Checkbox, Divider } from
 import { Button } from "@mui/material";
 
 
-export default function Campaign({ }) {    
-    function sendResults() {
-        alert("Here we should send an email.");
-    }
+export default function Campaign({ book, submitNomination }) {    
+    var templateParams = {
+        to_name: 'Alex',
+        from_name: 'Sandy',
+        book_title: 'Fall On Your Knees!'
+    };
     return (
         <div>
             <Divider
@@ -28,7 +30,7 @@ export default function Campaign({ }) {
                 }}
             >
                 {/* col 1 */}
-                <Grid item xs={3}>
+                <Grid item xs={6}>
                     <Typography variant="h6" align="center"
                         sx={{
                             color: "#B31D0C",
@@ -37,10 +39,6 @@ export default function Campaign({ }) {
                     >
                         Campaign Enrollment
                     </Typography>
-                </Grid>
-
-                {/* col 2 */}
-                <Grid item xs={3}>
                     <Typography variant="h6" align="center">
                         All Zones
                     </Typography>
@@ -58,81 +56,78 @@ export default function Campaign({ }) {
                         label="$80"
                         labelPlacement="bottom"
                     />
+
                 </Grid>
 
-                {/* col 3 */}
-                <Grid item xs={6}>
-                    <Typography variant="h6" align="center"
-                        sx={{
-                            borderRadius: '50%',
-                            '&.Mui-checked': {
-                                color: '#fff',
-                                backgroundColor: '#B31D0C',
-                            },
-                        }}>
-                        Enhancement(s)
-                    </Typography>
-                    <FormGroup row>
-                        <FormControlLabel
-                            control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                            label="Zone 1"
-                            labelPlacement="start"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                            label="Zone 2"
-                            labelPlacement="start"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                            label="Zone 3"
-                            labelPlacement="start"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                            label="Zone 4"
-                            labelPlacement="start"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                            label="Zone 5"
-                            labelPlacement="start"
-                        />
-                    </FormGroup>
+             
+                {/* col 2 */}
+                <Grid container item xs={6} direction="column"
+                            sx={
+                                {
+                                    ml: 20,
+                                }
+                            }
+                        >
+                            <FormGroup>
+                                <Grid container item direction="column">
+                                    <FormControlLabel
+                                        control={<Checkbox sx={{
+                                            borderRadius: '50%',
+                                            '&.Mui-checked': {
+                                                color: '#fff',
+                                                backgroundColor: '#B31D0C',
+                                            },
+                                        }} />}
+                                        label="Zone 1 - Rural Central Ontario"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox sx={{
+                                            borderRadius: '50%',
+                                            '&.Mui-checked': {
+                                                color: '#fff',
+                                                backgroundColor: '#B31D0C',
+                                            },
+                                        }} />}
+                                        label="Zone 2 - Northern Alberta"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox sx={{
+                                            borderRadius: '50%',
+                                            '&.Mui-checked': {
+                                                color: '#fff',
+                                                backgroundColor: '#B31D0C',
+                                            },
+                                        }} />}
+                                        label="Zone 3 -Northern Saskatchewan"
+                                    />
+
+                                    <FormControlLabel
+                                        control={<Checkbox sx={{
+                                            borderRadius: '50%',
+                                            '&.Mui-checked': {
+                                                color: '#fff',
+                                                backgroundColor: '#B31D0C',
+                                            },
+                                        }} />}
+                                        label="Zone 4 - Rural Central Ontario"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox sx={{
+                                            borderRadius: '50%',
+                                            '&.Mui-checked': {
+                                                color: '#fff',
+                                                backgroundColor: '#B31D0C',
+                                            },
+                                        }} />}
+                                        label="Zone 5 - Rural Newfoundland & Labrador"
+                                    />
+                                </Grid>
+
+                            </FormGroup>
                 </Grid>
             </Grid>
 
-            <Button onClick={() => sendResults()}
+            <Button type="submit"
                 variant="contained"
                 sx={{
                     backgroundColor: "#FF0000",

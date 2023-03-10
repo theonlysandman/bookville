@@ -2,11 +2,21 @@ import { Box } from "@mui/system"
 import { Grid, TextField, Typography } from "@mui/material"
 import placeholder from "../../src/assets/logo-placeholder.png"
 import { Divider } from "@mui/material"
+import { Image, StyleSheet, Dimensions } from "react-native";
 
 export default function LPGMembers({ book }) {
-    console.log("before");
-    console.log(book);
-    console.log("after");
+
+    const win = Dimensions.get('window');
+
+    const styles = StyleSheet.create({
+        image: {
+            flex: 1,
+            alignSelf: 'stretch',
+            width: win.width,
+            height: win.height,
+        }
+    });
+
   return (
 
       <Box
@@ -70,13 +80,21 @@ export default function LPGMembers({ book }) {
                           ? book?.Imprint?.ImprintName?._text
                           : ""
                   } />
-                  <TextField label="Your Name" sx={{ mb: 2 }} />
+                  <TextField name="your" label="Your Name" sx={{ mb: 2 }} />
                   <TextField label="Email" sx={{ mb: 2 }} />
               </Grid>
 
-              <Grid container item xs={6} direction="column">
+              <Grid container item xs={2} direction="column" >
                   {/* add image here */}
-                  <img src={placeholder} alt="placeholder" />
+                  <Image
+                      style={styles.image}
+                      resizeMode={'contain'}   /* <= changed  */
+                      alt="Missing Cover"
+                      source={
+                          book.hasOwnProperty("MediaFile")
+                              ? book?.MediaFile?.MediaFileLink?._text
+                              : ""
+                      } /> 
               </Grid>
           </Grid>
           <Divider

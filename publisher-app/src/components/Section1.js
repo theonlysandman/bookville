@@ -13,7 +13,11 @@ export default function Section1({ book }) {
         var str4 = str3.replace(/&lt;\/p&gt;/g, "");
         var str5 = str4.replace(/&lt;br&gt;/g, "");
         var str6 = str5.replace(/&lt;\/?em&gt;/g, "");
-        return str6;
+        var str7 = str6.replace(/&lt;\/b&gt;/g, "");
+        var str8 = str7.replace(/&lt;b&gt;/g, "");
+        
+
+        return str8;
     }
   return (
       <Box className="publisher">
@@ -40,8 +44,8 @@ export default function Section1({ book }) {
                   }}
               >
                   {
-                      book.hasOwnProperty("SupplyDetail")
-                          ? book?.Title?.TitleText._text
+                      book.hasOwnProperty("Title")
+                          ? book?.Title[0]?.TitleText._text
                           : ""
                   }
               </Typography>
@@ -66,35 +70,47 @@ export default function Section1({ book }) {
                                       )
                                       : ""
                               } />
-                              <TextField label="Price" sx={{ mr: 4 }} value={
-                                  book.hasOwnProperty("SupplyDetail")
-                                      ? book?.SupplyDetail?.Price[0]
-                                          ?.PriceAmount?._text
-                                      : ""
-                              } />
+                              {/*<TextField label="Price" sx={{ mr: 4 }} value={*/}
+                              {/*    book.hasOwnProperty("SupplyDetail")*/}
+                              {/*        ? book?.SupplyDetail?.Price[0]*/}
+                              {/*            ?.PriceAmount?._text*/}
+                              {/*        : ""*/}
+                              {/*} />*/}
                           </Grid> 
                       </Grid>
 
-                      <Grid container item xs={12} direction="column">
+                      {/*<Grid container item xs={12} direction="column">*/}
                           {/*<TextField label="Book Title" sx={{ mb: 2 }} />*/}
-                          <TextField label="Subtitle" sx={{ mb: 2 }} value={
-                              book.hasOwnProperty("Subtitle")
-                                  ? book?.Subtitle?._text
-                                  : ""
-                          } />
-                      </Grid>
+                      {/*    <TextField label="Subtitle" sx={{ mb: 2 }} value={*/}
+                      {/*        book.hasOwnProperty("Subtitle")*/}
+                      {/*            ? book?.Subtitle?._text*/}
+                      {/*            : ""*/}
+                      {/*    } />*/}
+                      {/*</Grid>*/}
 
                       <Grid container item xs={12} direction="column">
                           {/* Grid for contributor(s) and HomeTown to show in a single line  */}
                           <Grid container item xs={12} direction="row">
-                              <TextField label="Contributor(s)" sx={{ mr: 4 }} value={
+                              <TextField label="Contributor(s)" sx={{ mr: 6 }} value={
                                   book.hasOwnProperty("Contributor")
                                       ? book?.Contributor?.PersonName?._text
                                       : ""
                               } />
-                              <TextField label="HomeTown" sx={{ mr: 4 }} />
+                             {/* <TextField label="HomeTown" sx={{ mr: 4 }} />*/}
                           </Grid>
                       </Grid>
+
+                      <Grid container item xs={6} direction="column">
+                          <TextField label="Subject (BISAC) " value={
+                              book.hasOwnProperty("MainSubject")
+                                  ? book?.MainSubject
+                                      ?.SubjectHeadingText
+                                      ?._text
+                                  : "No data found"
+                          } />
+                      </Grid>
+
+
 
                       <Grid container item xs={12} direction="column">
                           <TextField label="Main Description" sx={{ mb: 2 }} value={
@@ -108,18 +124,8 @@ export default function Section1({ book }) {
                           <TextField label="Short Description" />
                       </Grid>
 
-                      <Grid container item xs={6} direction="column">
-                          <TextField label="Subject (BISAC) " value={
-                              book.hasOwnProperty("MainSubject")
-                                  ? book?.MainSubject
-                                      ?.SubjectHeadingText
-                                      ?._text
-                                  : ""
-                          } />
-                      </Grid>
-
-                      <Grid container item xs={6} direction="column">
-                          <TextField label="Region (BISAC)" sx={{ mb: 2 }} />
+                      <Grid container item xs={12} direction="column">
+                          {<TextField label="Additional Publisher Notes" sx={{ mb: 2 }} />}
                       </Grid>
 
                   </Grid>
@@ -137,123 +143,47 @@ export default function Section1({ book }) {
                   }} >
                       <div>
                           <Grid container item xs={12} direction="column">
-                              <Typography variant="h6" sx={{ mb: 1 }}>
-                                  Additional Location Relevance
-                              </Typography>
-                              <Typography variant="p" sx={{
-                                  mb: 2,
-                                  textAlign: "left",
-                              }}>
-                                  (check all that apply)
-                              </Typography>
-                              <FormControlLabel control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />} label="Contributor"
-                              />
-                              <FormControlLabel
-                                  control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                                  label="Theme"
-                              />
-                              <FormControlLabel
-                                  control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                                  label="Subject"
-                              />
+                            {/*  <Typography variant="h6" sx={{ mb: 1 }}>*/}
+                            {/*      Additional Location Relevance*/}
+                            {/*  </Typography>*/}
+                            {/*  <Typography variant="p" sx={{*/}
+                            {/*      mb: 2,*/}
+                            {/*      textAlign: "left",*/}
+                            {/*  }}>*/}
+                            {/*      (check all that apply)*/}
+                            {/*  </Typography>*/}
+                            {/*  <FormControlLabel control={<Checkbox sx={{*/}
+                            {/*    borderRadius: '50%',*/}
+                            {/*    '&.Mui-checked': {*/}
+                            {/*        color: '#fff',*/}
+                            {/*        backgroundColor: '#B31D0C',*/}
+                            {/*    },*/}
+                            {/*}} />} label="Contributor"*/}
+                            {/*  />*/}
+                            {/*  <FormControlLabel*/}
+                            {/*      control={<Checkbox sx={{*/}
+                            {/*    borderRadius: '50%',*/}
+                            {/*    '&.Mui-checked': {*/}
+                            {/*        color: '#fff',*/}
+                            {/*        backgroundColor: '#B31D0C',*/}
+                            {/*    },*/}
+                            {/*}} />}*/}
+                            {/*      label="Theme"*/}
+                            {/*  />*/}
+                            {/*  <FormControlLabel*/}
+                            {/*      control={<Checkbox sx={{*/}
+                            {/*    borderRadius: '50%',*/}
+                            {/*    '&.Mui-checked': {*/}
+                            {/*        color: '#fff',*/}
+                            {/*        backgroundColor: '#B31D0C',*/}
+                            {/*    },*/}
+                            {/*}} />}*/}
+                            {/*      label="Subject"*/}
+                            {/*  />*/}
                           </Grid>
 
                       </div>
 
-                      <div>
-                          <Grid container item xs={12} direction="column"
-                              sx={
-                                  {
-                                      ml: 20,
-                                  }
-                              }
-                          >
-                              <FormGroup>
-                                  <Grid container item direction="column">
-                                      <FormControlLabel
-                                          control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                              '&.Mui-checked': {
-                                                color: '#fff',
-                                                backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                                          label="Zone 1 - Rural Central Ontario"
-                                      />
-                                      <FormControlLabel
-                                          control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                                          label="Zone 2 - Northern Alberta"
-                                      />
-                                      <FormControlLabel
-                                          control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                                          label="Zone 3 -Northern Saskatchewan"
-                                      />
-
-                                      <FormControlLabel
-                                          control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                                          label="Zone 3 - Rural Central Ontario"
-                                      />
-                                      <FormControlLabel
-                                          control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                                          label="Zone 4 - Rural Central Ontario"
-                                      />
-                                      <FormControlLabel
-                                          control={<Checkbox sx={{
-                                borderRadius: '50%',
-                                '&.Mui-checked': {
-                                    color: '#fff',
-                                    backgroundColor: '#B31D0C',
-                                },
-                            }} />}
-                                          label="Zone 5 - Rural Newfoundland & Labrador"
-                                      />
-                                  </Grid>
-
-                              </FormGroup>
-                          </Grid>
-                      </div>
 
                   </Grid>
               </Box>
