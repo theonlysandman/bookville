@@ -17,6 +17,16 @@ import emailjs from "@emailjs/browser";
 
 export default function Result({ getBookDetails, setEan, book }) {
 	const { id } = useParams();
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [zoneCheckboxes, setzoneCheckboxes] = useState({
+		zone1: false,
+		zone2: false,
+		zone3: false,
+		zone4: false,
+		zone5: false,
+		enrollment: false
+	});
 
 	const [error, setError] = useState("");
 
@@ -47,7 +57,7 @@ export default function Result({ getBookDetails, setEan, book }) {
 		return str7;
 	}
 
-	const submitNomination = (templateParams) => {
+	const submitNomination = () => {
 		console.log("here we should send an email");
 		// console.log(e.target);
 		// e.preventDefault();
@@ -71,25 +81,50 @@ export default function Result({ getBookDetails, setEan, book }) {
 	)}</p>
    `;
 
+		const templateParams = {
+			name: name,
+			email: email,
+			subject: emailSubject,
+			zone1Checkbox: zoneCheckboxes?.zone1,
+			zone2Checkbox: zoneCheckboxes?.zone2,
+			zone3Checkbox: zoneCheckboxes?.zone3,
+			zone4Checkbox: zoneCheckboxes?.zone4,
+			zone5Checkbox: zoneCheckboxes?.zone5,
+			enrollmentCheckbox: zoneCheckboxes?.enrollment
+		};
 
 		// Send the email
-		//	emailjs.send('service_828erdg', 'template_gwo9djb', templateParams, '-ajVzYm2FgRIQHhAT')
-		//		.then((result) => {
-		//			console.log(result.text);
-		//		}, (error) => {
-		//			console.log(error.text);
-		//		});
+		emailjs
+			.send(
+				"service_828erdg",
+				"template_gwo9djb",
+				templateParams,
+				"-ajVzYm2FgRIQHhAT"
+			)
+			.then(
+				(result) => {
+					console.log(result.text);
+				},
+				(error) => {
+					console.log(error.text);
+				}
+			);
 	};
 
 	return (
 		<>
 			<Header />
 			<form onSubmit={handleSubmit}>
-				<LPGMembers book={book} />
+				<LPGMembers book={book} setEmail={setEmail} setName={setName} />
 				<Section1 book={book} />
-				<Campaign book={book} submitNomination={submitNomination} />
+				<Campaign
+					book={book}
+					submitNomination={submitNomination}
+					setzoneCheckboxes={setzoneCheckboxes}
+					zoneCheckboxes={zoneCheckboxes}
+				/>
 			</form>
-			<Footer />
+			{/* <Footer /> */}
 			<div id="error-messages">{error && <p>{error}</p>}</div>
 		</>
 	);

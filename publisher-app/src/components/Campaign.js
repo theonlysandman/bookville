@@ -9,12 +9,12 @@ import {
 } from "@mui/material";
 import { Button } from "@mui/material";
 
-export default function Campaign({ book, submitNomination }) {
-	var templateParams = {
-		to_name: "Alex",
-		from_name: "Sandy",
-		book_title: "Fall On Your Knees!"
-	};
+export default function Campaign({
+	book,
+	submitNomination,
+	setzoneCheckboxes,
+	zoneCheckboxes
+}) {
 	return (
 		<div>
 			<Divider
@@ -63,6 +63,12 @@ export default function Campaign({ book, submitNomination }) {
 										backgroundColor: "#B31D0C"
 									}
 								}}
+								onChange={(e) =>
+									setzoneCheckboxes({
+										...zoneCheckboxes,
+										enrollment: e.target.checked
+									})
+								}
 							/>
 						}
 						shape="rounded"
@@ -93,6 +99,12 @@ export default function Campaign({ book, submitNomination }) {
 												backgroundColor: "#B31D0C"
 											}
 										}}
+										onChange={(e) =>
+											setzoneCheckboxes({
+												...zoneCheckboxes,
+												zone1: e.target.checked
+											})
+										}
 									/>
 								}
 								label="Zone 1 - Rural Central Ontario"
@@ -107,6 +119,12 @@ export default function Campaign({ book, submitNomination }) {
 												backgroundColor: "#B31D0C"
 											}
 										}}
+										onChange={(e) =>
+											setzoneCheckboxes({
+												...zoneCheckboxes,
+												zone2: e.target.checked
+											})
+										}
 									/>
 								}
 								label="Zone 2 - Northern Alberta"
@@ -121,6 +139,12 @@ export default function Campaign({ book, submitNomination }) {
 												backgroundColor: "#B31D0C"
 											}
 										}}
+										onChange={(e) =>
+											setzoneCheckboxes({
+												...zoneCheckboxes,
+												zone3: e.target.checked
+											})
+										}
 									/>
 								}
 								label="Zone 3 -Northern Saskatchewan"
@@ -136,6 +160,12 @@ export default function Campaign({ book, submitNomination }) {
 												backgroundColor: "#B31D0C"
 											}
 										}}
+										onChange={(e) =>
+											setzoneCheckboxes({
+												...zoneCheckboxes,
+												zone4: e.target.checked
+											})
+										}
 									/>
 								}
 								label="Zone 4 - Rural Central Ontario"
@@ -150,6 +180,12 @@ export default function Campaign({ book, submitNomination }) {
 												backgroundColor: "#B31D0C"
 											}
 										}}
+										onChange={(e) =>
+											setzoneCheckboxes({
+												...zoneCheckboxes,
+												zone5: e.target.checked
+											})
+										}
 									/>
 								}
 								label="Zone 5 - Rural Newfoundland & Labrador"
@@ -161,7 +197,7 @@ export default function Campaign({ book, submitNomination }) {
 
 			<Button
 				type="submit"
-				onClick={() => submitNomination(templateParams)}
+				onClick={submitNomination}
 				variant="contained"
 				sx={{
 					backgroundColor: "#FF0000",
