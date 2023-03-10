@@ -103,16 +103,6 @@ export default function LPGMembers({ book, setEmail, setName }) {
 
 				<Grid container item xs={2} direction="column">
 					{/* add image here */}
-				{/*	<Image*/}
-				{/*		style={styles.image}*/}
-				{/*		resizeMode={"contain"} /* <= changed  */*/}
-				{/*		alt="Missing Cover"*/}
-				{/*		source={*/}
-				{/*			book.hasOwnProperty("MediaFile")*/}
-				{/*				? book?.MediaFile?.MediaFileLink?._text*/}
-				{/*				: ""*/}
-				{/*		}*/}
-				{/*	/>*/}
 				</Grid>
 			</Grid>
 			<Divider
@@ -130,3 +120,15 @@ export default function LPGMembers({ book, setEmail, setName }) {
 		</Box>
 	);
 }
+
+
+//<Image
+//	style={styles.image}
+//	{		resizeMode = { "contain"} /* <= changed  */}
+//	alt="Missing Cover"
+//	source={
+//		book.hasOwnProperty("MediaFile")
+//			? book?.MediaFile?.MediaFileLink?._text
+//			: ""
+//	}
+///>
