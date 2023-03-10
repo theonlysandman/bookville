@@ -126,23 +126,17 @@ function Compaign() {
                     </FormGroup>
                 </Grid>
             </Grid>
-
-                <Button
-                    variant="contained"
-                    sx={{
-                        backgroundColor: "#FF0000",
-                        color: "#FFFFFF",
-                        cursor: "pointer",
-                        "&:hover": {
-                            backgroundColor: "#FF3333",
-                        },
-                        marginBottom: "10px",
-                        marginTop: "10px",
-                        borderRadius: "10px",
-                    }}
-                >
-                    Submit
-                </Button>
+            <Button type="submit" variant="contained"
+                sx={{
+                    px: 4,
+                    py: 2,
+                    mt: 2,
+                    backgroundColor: "#B31D0C",
+                    fontWeight: "bold",
+                    fontSize: "16px",
+                    mb: "20px",
+                }}
+            >Submit</Button>
         </div>
     );
 }

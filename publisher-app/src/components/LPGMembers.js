@@ -32,10 +32,35 @@ const LPGMembers = () => {
           {/* make a Grid with inputs publishers, Imprint, Your name, Email */}
           <Grid container spacing={2}>
               <Grid container item xs={6} direction="column">
-                  <TextField label="Publisher" sx={{ mb: 2 }} />
-                  <TextField label="Imprint" sx={{ mb: 2 }} />
-                  <TextField label="Your Name" sx={{ mb: 2 }} />
-                  <TextField label="Email" sx={{ mb: 2 }} />
+                  <TextField label="Publisher" sx={{
+                      mb: 2,
+                      backgroundColor: "#B31D0C",                        
+                  }} />
+                  <TextField label="Imprint" sx={{
+                      mb: 2,
+                      backgroundColor: "#B31D0C",
+                  }} />
+
+                  <TextField
+                      label="Your Name"
+                      type={"text"}
+                      sx={{
+                          mb: 2,
+                          backgroundColor: "#B31D0C",
+                          color: "white",
+                      }}
+                      inputProps={{
+                          style: { color: "white", backgroundColor: "#B31D0C" }
+                      }}
+                  />
+
+                  <TextField label="Email"
+                      type={"email"}
+                      sx={{
+                      mb: 2,
+                      backgroundColor: "#B31D0C",
+                      color: "white",
+                  }} />
               </Grid>
 
               <Grid container item xs={6} direction="column">

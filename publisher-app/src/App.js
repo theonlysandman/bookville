@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
+import {TextField} from "@mui/material";
 
 //import PublisherBookForm from "./PublisherBookForm"
 import { BiblioshareAPI } from "./apis/BiblioshareAPI";
@@ -77,22 +79,51 @@ function App() {
                 </Routes>
 
                 <Header />
-                <LPGMembers />
-                <Section1 />
-                <Compaign />
 
-                {/* <div id="isbn-search">
+                <Box id="isbn-search"
+                    sx={{
+                        width: "90%",
+                        color: "white",
+                        mt: 4,
+                        ml: "60px",
+                    }}
+                >
                     <form id="ean" onSubmit={getBookDetails} >
-                        <input type="text" placeholder="Enter EAN" onChange={(e) => setEan(e.target.value)} ></input>
-                        <Button type="submit" variant="contained">Get ONIX Data</Button>
+                        <TextField type="text" placeholder="Enter EAN" onChange={(e) => setEan(e.target.value)}
+                            sx={{
+                                p: 2,
+                                width: "50%",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "5px",
+                                fontSize: "1.2rem",
+                                "&:focus": {
+                                    outline: "none",
+                                },
+                            }}
+                            
+                        ></TextField>
+                        <Button type="submit" variant="contained"
+                            sx={{
+                                p: 2,
+                                mt: 2,
+                                backgroundColor: "#B31D0C",
+                                fontWeight: "bold",
+                                fontSize: "16px"
+                            }}
+                        >Get ONIX Data</Button>
                     </form>
-                </div>
+                </Box>
 
                 <div id="error-messages">
                     {error && <p>{error}</p>}
-                </div> */}
+                </div>
 
                 {/* Title 1 Code */}
+
+                <LPGMembers />
+                <Section1 />
+                <Compaign />
                 
             </Box>
         </>

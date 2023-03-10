@@ -36,36 +36,57 @@ const Section1 = () => {
                       <Grid container item direction="column">
                           {/* grid to show the ISBN, Pub Year and Price in a row */}
                           <Grid container item xs={12} direction="row">
-                              <TextField label="ISBN" sx={{ mr: 4 }} />
-                              <TextField label="Pub Year" sx={{ mr: 4 }} />
-                              <TextField label="Price" sx={{ mr: 4 }} />
+                              <TextField label="ISBN" sx={{ mr: 4, 
+                      backgroundColor: "#B31D0C", }} />
+                              <TextField label="Pub Year" sx={{ mr: 4, 
+                      backgroundColor: "#B31D0C", }} />
+                              <TextField label="Price" sx={{ mr: 4, 
+                      backgroundColor: "#B31D0C", }} />
                           </Grid>
                       </Grid>
 
                       <Grid container item xs={12} direction="column">
-                          <TextField label="Book Title" sx={{ mb: 2 }} />
-                          <TextField label="Subtitle" sx={{ mb: 2 }} />
+                          <TextField label="Book Title" sx={{
+                              mb: 2, backgroundColor: "#B31D0C",
+                                color: "white",
+                          }} />
+                          <TextField label="Subtitle" sx={{ mb: 2,                       backgroundColor: "#B31D0C", }} />
                       </Grid>
 
                       <Grid container item xs={12} direction="column">
                           {/* Grid for contributor(s) and HomeTown to show in a single line  */}
                           <Grid container item xs={12} direction="row">
-                              <TextField label="Contributor(s)" sx={{ mr: 4 }} />
-                              <TextField label="HomeTown" sx={{ mr: 4 }} />
+                              <TextField label="Contributor(s)" sx={{
+                                  mr: 4,
+                                  backgroundColor: "#B31D0C"
+                              }} />
+                              <TextField label="HomeTown" sx={{ mr: 4,                       backgroundColor: "#B31D0C", }} />
                           </Grid>
                       </Grid>
 
                       <Grid container item xs={12} direction="column">
-                          <TextField label="Main Description" sx={{ mb: 2 }} />
-                          <TextField label="Short Description" />
+                          <TextField label="Main Description" sx={{
+                              mb: 2,
+                              backgroundColor: "#B31D0C", }} />
+                          <TextField label="Short Description"
+                              sx={{
+                                  mb: 2,
+                                  backgroundColor: "#B31D0C",
+                              }}
+                          />
                       </Grid>
 
                       <Grid container item xs={6} direction="column">
-                          <TextField label="Subject (BISAC) " />
+                          <TextField label="Subject (BISAC) "
+                              sx={{
+                                  mb: 2,
+                                  backgroundColor: "#B31D0C",
+                              }}
+                          />
                       </Grid>
 
                       <Grid container item xs={6} direction="column">
-                          <TextField label="Region (BISAC)" sx={{ mb: 2 }} />
+                          <TextField label="Region (BISAC)" sx={{ mb: 2, backgroundColor: "#B31D0C" }} />
                       </Grid>
 
                   </Grid>
