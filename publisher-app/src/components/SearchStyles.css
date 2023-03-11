@@ -1,4 +1,16 @@
 #search_box {
-    background-color: #EDEDED;
-    padding-bottom: 200px;
+  background-color: #ededed;
+  padding-bottom: 200px;
+  padding: 32px 64px;
+  box-sizing: border-box;
+}
+.search-box,
+.error-msg,
+.success-msg {
+  min-height: calc(100vh - 337px);
+  display: flex;
+  align-items: center;
+}
+.search-box .MuiInputBase-input {
+  background: #fff;
 }
