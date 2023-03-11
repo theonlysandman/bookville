@@ -22,8 +22,9 @@ export default function Success({getBookDetails, setEan, ean}) {
             <div id="success-msg">
               Success! You have submitted your book for nomination.
               <br />
-              Click here to <a href="/search/">submit another book</a>, remember
-              you can nominate up to five books.
+              Click here to <Link to="/search">submit another book</Link>
+              {/* <a href="/search/">submit another book</a> */}, remember you
+              can nominate up to five books.
             </div>
           </Grid>
           <Grid container item xs={4} direction="column"></Grid>
