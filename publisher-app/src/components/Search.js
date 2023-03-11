@@ -9,12 +9,13 @@ import Grid from "@mui/material/Grid";
 import "./SearchStyles.css";
 import {TextField} from "@mui/material";
 
-export default function Search({getBookDetails, setEan, ean}) {
+export default function Search({getBookDetails, setEan, ean, isEanVaild}) {
   const {id} = useParams();
   const navigate = useNavigate();
 
   console.log("Know id?");
   console.log(id);
+  console.log(isEanVaild, "isEanVaild");
 
   function resultsRedirect(ean) {
     navigate(`/results/${ean}`);

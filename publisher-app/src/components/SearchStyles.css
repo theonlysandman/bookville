@@ -11,6 +11,11 @@
   display: flex;
   align-items: center;
 }
+.error-msg,
+.success-msg {
+  justify-content: center;
+  text-align: center;
+}
 .search-box .MuiInputBase-input {
   background: #fff;
 }

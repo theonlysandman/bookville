@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import "./App.css";
 import Results from "./components/Results";
 import Search from "./components/Search";
@@ -20,6 +20,7 @@ import Footer from "./components/Footer";
 function App() {
   const [book, setBook] = useState("");
   const [ean, setEan] = useState("");
+  // const [isEanVaild, setIsEanVaild] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -59,7 +60,7 @@ function App() {
 
   return (
     <>
-      <div classNameName="App">
+      <div className="App">
         <Header />
         <div className="main-container">
           <Routes>
