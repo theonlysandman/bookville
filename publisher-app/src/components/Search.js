@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import "./Header.css";
 import Button from "@mui/material/Button";
@@ -27,7 +27,9 @@ export default function Search({getBookDetails, setEan, ean, isEanVaild}) {
       setIsError(true);
     }
   }
-
+  useEffect(() => {
+    setEan("");
+  }, []);
   return (
     <>
       <div id="search_box" className="search-box">
