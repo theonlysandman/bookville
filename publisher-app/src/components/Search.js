@@ -22,7 +22,7 @@ export default function Search({getBookDetails, setEan, ean, isEanVaild}) {
     e.preventDefault();
     if (ean) {
       navigate(`/results/${ean}`);
-      // setIsError(false);
+      setIsError(false);
     } else {
       setIsError(true);
     }
