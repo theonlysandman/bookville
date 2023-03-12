@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useParams} from "react-router-dom";
 import "./Header.css";
 import Button from "@mui/material/Button";
@@ -7,18 +7,25 @@ import {useNavigate} from "react-router-dom";
 import Footer from "./Footer";
 import Grid from "@mui/material/Grid";
 import "./SearchStyles.css";
-import {TextField} from "@mui/material";
+import {Alert, TextField} from "@mui/material";
 
 export default function Search({getBookDetails, setEan, ean, isEanVaild}) {
   const {id} = useParams();
   const navigate = useNavigate();
+  const [isError, setIsError] = useState(false);
 
   console.log("Know id?");
   console.log(id);
   console.log(isEanVaild, "isEanVaild");
 
-  function resultsRedirect(ean) {
-    navigate(`/results/${ean}`);
+  function resultsRedirect(e, ean) {
+    e.preventDefault();
+    if (ean) {
+      navigate(`/results/${ean}`);
+      // setIsError(false);
+    } else {
+      setIsError(true);
+    }
   }
 
   return (
@@ -27,10 +34,14 @@ export default function Search({getBookDetails, setEan, ean, isEanVaild}) {
         <Grid container spacing={12}>
           <Grid container item xs={4} direction="column"></Grid>
           <Grid container item xs={4} direction="column">
+            {isError ? (
+              <Alert severity="error" sx={{mb: 2}}>
+                Please enter ISBN!
+              </Alert>
+            ) : null}
             <div id="isbn-search">
-              <form id="ean" onSubmit={() => resultsRedirect(ean)}>
+              <form id="ean" onSubmit={(e) => resultsRedirect(e, ean)}>
                 <TextField
-                  //   id="outlined-basic"
                   label="ISBN"
                   variant="outlined"
                   fullWidth
@@ -40,6 +51,7 @@ export default function Search({getBookDetails, setEan, ean, isEanVaild}) {
                   sx={{mb: 2}}
                   helperText="ISBN Ex: 012345678912"
                 />
+
                 {/* <input
                   type="text"
                   placeholder="Enter ISBN"
