@@ -30,6 +30,11 @@
   width: 148px;
 }
 
+textarea {
+  background-color: #DDDDDD;
+  color: #000;
+}
+
 #error-messages {
   background-color: white;
   width: 70%;

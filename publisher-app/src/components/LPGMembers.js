@@ -83,15 +83,6 @@ export default function LPGMembers({book, setEmail, setName}) {
             sx={{mb: 2}}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <TextField
-            label="ISBN"
-            // sx={{ mr: 4 }}
-            value={
-              book.hasOwnProperty("RecordReference")
-                ? book?.RecordReference._text
-                : ""
-            }
-          />
         </Grid>
 
         <Grid container item xs={2} direction="column">

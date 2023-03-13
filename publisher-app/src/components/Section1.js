@@ -1,8 +1,9 @@
 import {Box} from "@mui/system";
-import {Grid, TextField, Typography} from "@mui/material";
+import { Grid, TextField, TextareaAutosize, Typography} from "@mui/material";
 import {FormControlLabel, FormGroup} from "@mui/material";
-import {Checkbox} from "@mui/material";
-import {Divider} from "@mui/material";
+import { Checkbox, Divider } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import "../App.css";
 
 export default function Section1({book}) {
   function removeAngleBrackets(str) {
@@ -17,6 +18,33 @@ export default function Section1({book}) {
 
     return str8;
   }
+
+ 
+  const styles = theme => ({
+    input: {
+      "& input.Mui-disabled": {
+        color: "green"
+      }
+    }
+  });
+
+
+  const CustomDisableInput = styled(TextField)(() => ({
+    ".MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000",
+      color: "#000"
+    }
+  }));
+
+  const CustomDisableInputArea = styled(TextareaAutosize)(() => ({
+    ".MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000",
+      color: "#000",
+      backgroundColor: "#ECECEC"
+    }
+  }));
+
+
   return (
     <Box className="publisher">
       <Box
@@ -27,6 +55,8 @@ export default function Section1({book}) {
           mb: 2,
           ml: "60px",
         }}>
+
+
         <Typography
           variant="h5"
           sx={{
@@ -37,15 +67,63 @@ export default function Section1({book}) {
             mb: 2,
             textAlign: "left",
           }}>
-          {book.hasOwnProperty("Title") ? book?.Title?.TitleText._text : ""}
+          Here is the information we found related to your title.
         </Typography>
 
         <Box class="form-section">
           <Grid container spacing={4}>
+
             <Grid container item direction="column">
               {/* grid to show the ISBN, Pub Year and Price in a row */}
               <Grid container item xs={12} direction="row">
-                <TextField
+                <CustomDisableInput
+                  disabled
+                  label="ISBN"
+                  // sx={{ mr: 4 }}
+                  value={
+                    book.hasOwnProperty("RecordReference")
+                      ? book?.RecordReference._text
+                      : ""
+                  }
+                />
+              </Grid>
+            </Grid>
+
+            <Grid container item direction="column">
+              {/* grid to show the ISBN, Pub Year and Price in a row */}
+              <Grid container item xs={12} direction="row">
+                <CustomDisableInput
+                  disabled
+                  label="Title"
+                  // sx={{ mr: 4 }}
+                  value={
+                    book.hasOwnProperty("Title") ? book?.Title?.TitleText._text : "" 
+                  }
+                />
+              </Grid>
+            </Grid>
+
+            <Grid container item direction="column">
+              {/* grid to show the ISBN, Pub Year and Price in a row */}
+              <Grid container item xs={12} direction="row">
+                <CustomDisableInput
+                  disabled
+                  label="Subtitle"
+                  // sx={{ mr: 4 }}
+                  value={
+                    book.hasOwnProperty("Subtitle")
+                      ? book?.Subtitle?._text
+                      : ""
+                  }
+                />
+              </Grid>
+            </Grid>
+
+
+            <Grid container item direction="column">
+              {/* grid to show the ISBN, Pub Year and Price in a row */}
+              <Grid container item xs={12} direction="row">
+                <CustomDisableInput
                   disabled
                   label="Pub Year"
                   sx={{mr: 4}}
@@ -64,19 +142,10 @@ export default function Section1({book}) {
               </Grid>
             </Grid>
 
-            {/*<Grid container item xs={12} direction="column">*/}
-            {/*<TextField label="Book Title" sx={{ mb: 2 }} />*/}
-            {/*    <TextField label="Subtitle" sx={{ mb: 2 }} value={*/}
-            {/*        book.hasOwnProperty("Subtitle")*/}
-            {/*            ? book?.Subtitle?._text*/}
-            {/*            : ""*/}
-            {/*    } />*/}
-            {/*</Grid>*/}
-
             <Grid container item xs={12} direction="column">
               {/* Grid for contributor(s) and HomeTown to show in a single line  */}
               <Grid container item xs={12} direction="row">
-                <TextField
+                <CustomDisableInput
                   disabled
                   label="Contributor(s)"
                   sx={{mr: 6}}
@@ -91,7 +160,7 @@ export default function Section1({book}) {
             </Grid>
 
             <Grid container item xs={6} direction="column">
-              <TextField
+              <CustomDisableInput
                 disabled
                 label="Subject (BISAC) "
                 value={
@@ -103,7 +172,8 @@ export default function Section1({book}) {
             </Grid>
 
             <Grid container item xs={12} direction="column">
-              <TextField
+              <CustomDisableInputArea
+                disabled
                 label="Main Description"
                 sx={{mb: 2}}
                 value={
@@ -114,18 +184,20 @@ export default function Section1({book}) {
               />
             </Grid>
 
-            <Divider
-              orientation="horizontal"
-              variant="middle"
-              sx={{
-                width: "100%",
-                height: "2px",
-                backgroundColor: "#FFCCCB",
-                margin: "0 auto 40px",
-                textAlign: "left",
-                marginTop: "20px",
-              }}
-            />
+            <Grid container item xs={12} direction="column">
+              <Typography
+                variant="h5"
+                sx={{
+                  color: "white",
+                  backgroundColor: "#737373",
+                  p: 2,
+                  borderRadius: 1,
+                  mb: 2,
+                  textAlign: "left",
+                }}>
+                Please complete this section.
+              </Typography>
+            </Grid>
 
             <Grid container item xs={12} direction="column">
               <TextField

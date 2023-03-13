@@ -18,65 +18,28 @@ export default function Campaign({
 }) {
   return (
     <div className="zones-section">
-      <Grid
-        container
-        alignItems="top"
-        spacing={3}
-        sx={{
-          paddingLeft: "60px",
-          //   width: "80%",
-        }}>
-        {/* col 1 */}
-        <Grid item xs={6}>
-          <Typography
-            variant="h6"
-            align="left"
-            sx={{
-              color: "#B31D0C",
-              fontWeight: "bold",
-            }}>
-            Campaign Enrollment
-          </Typography>
-          <Typography variant="h6" align="left">
-            All Zones
-          </Typography>
 
-          <FormControlLabel
-            control={
-              <Checkbox
-                sx={{
-                  borderRadius: "50%",
-                  //   "&.Mui-checked": {
-                  //     color: "#fff",
-                  //     backgroundColor: "#B31D0C",
-                  //   },
-                }}
-                onChange={(e) =>
-                  setzoneCheckboxes({
-                    ...zoneCheckboxes,
-                    enrollment: e.target.checked,
-                  })
-                }
-              />
-            }
-            shape="rounded"
-            label="$80"
-            // labelPlacement="bottom"
-          />
-        </Grid>
+
+      <Grid container direction="column">
 
         {/* col 2 */}
         <Grid
           container
           item
-          xs={6}
+          xs={12}
+          align="center"
           direction="column"
           //   sx={{
           //     ml: 20,
           //   }}
         >
           <FormGroup>
-            <Grid container item direction="column">
+            <Grid
+              container
+              xs={12}
+              itemAlign="center"
+              direction="column"
+            >
               <FormControlLabel
                 control={
                   <Checkbox
@@ -180,6 +143,54 @@ export default function Campaign({
               />
             </Grid>
           </FormGroup>
+          {/*<Grid*/}
+          {/*  container*/}
+          {/*  alignItems="top"*/}
+          {/*  spacing={3}*/}
+          {/*  sx={{*/}
+          {/*    paddingLeft: "60px",*/}
+          {/*    //   width: "80%",*/}
+          {/*  }}>*/}
+          {/* col 1 */}
+          {/*<Grid item xs={6}>*/}
+          {/*  <Typography*/}
+          {/*    variant="h6"*/}
+          {/*    align="left"*/}
+          {/*    sx={{*/}
+          {/*      color: "#B31D0C",*/}
+          {/*      fontWeight: "bold",*/}
+          {/*    }}>*/}
+          {/*    Campaign Enrollment*/}
+          {/*  </Typography>*/}
+          {/*  <Typography variant="h6" align="left">*/}
+          {/*    All Zones*/}
+          {/*  </Typography>*/}
+
+          {/*  <FormControlLabel*/}
+          {/*    control={*/}
+          {/*      <Checkbox*/}
+          {/*        sx={{*/}
+          {/*          borderRadius: "50%",*/}
+          {/*          //   "&.Mui-checked": {*/}
+          {/*          //     color: "#fff",*/}
+          {/*          //     backgroundColor: "#B31D0C",*/}
+          {/*          //   },*/}
+          {/*        }}*/}
+          {/*        onChange={(e) =>*/}
+          {/*          setzoneCheckboxes({*/}
+          {/*            ...zoneCheckboxes,*/}
+          {/*            enrollment: e.target.checked,*/}
+          {/*          })*/}
+          {/*        }*/}
+          {/*      />*/}
+          {/*    }*/}
+          {/*    shape="rounded"*/}
+          {/*    label="$80"*/}
+          {/*    // labelPlacement="bottom"*/}
+          {/*  />*/}
+          {/*</Grid>*/}
+
+
         </Grid>
       </Grid>
       <Box
@@ -194,20 +205,8 @@ export default function Campaign({
           type="submit"
           onClick={submitNomination}
           variant="contained"
-          sx={{borderRadius: "10px"}}
-          // sx={{
-          // 	// backgroundColor: "#FF0000",
-          // 	color: "#FFFFFF",
-          // 	cursor: "pointer",
-          // 	"&:hover": {
-          // 		backgroundColor: "#FF3333"
-          // 	},
-          // 	marginBottom: "10px",
-          // 	marginTop: "10px",
-          // 	borderRadius: "10px"
-          // }}
-        >
-          Submit
+          sx={{borderRadius: "10px"}}        >
+          Submit Nomination
         </Button>
       </Box>
     </div>
