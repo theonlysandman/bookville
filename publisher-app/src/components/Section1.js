@@ -9,14 +9,15 @@ export default function Section1({
   book,
   setzoneDetailCheckboxes,
   zoneDetailCheckboxes,
+  setSplash,
+  setShortDesc,
+  setPubNotes,
 }) {
-  function removeAngleBrackets(str) {
 
+  function removeHtmlTags(str) {
     return str.replace(/&lt;.*?&gt;/g, "");
-
   }
 
- 
   const styles = theme => ({
     input: {
       "& input.Mui-disabled": {
@@ -24,7 +25,6 @@ export default function Section1({
       }
     }
   });
-
 
   const CustomDisableInput = styled(TextField)(() => ({
     ".MuiInputBase-input.Mui-disabled": {
@@ -149,7 +149,7 @@ export default function Section1({
                   sx={{mr: 6}}
                   value={
                     book.hasOwnProperty("Contributor")
-                      ? removeAngleBrackets(book?.Contributor?.BiographicalNote?._text)
+                      ? removeHtmlTags(book?.Contributor?.BiographicalNote?._text)
                       : ""
                   }
                 />
@@ -178,7 +178,7 @@ export default function Section1({
                 sx={{mb: 2}}
                 value={
                   book.hasOwnProperty("OtherText")
-                    ? removeAngleBrackets(book.OtherText[0].Text._text)
+                    ? removeHtmlTags(book.OtherText[0].Text._text)
                     : ""
                 }
               />
@@ -205,6 +205,7 @@ export default function Section1({
                 className="editable"
                 label="Splash Line - Max 100 Characters"
                 inputProps={{ maxLength: 100 }}
+                onChange={(e) => setSplash(e.target.value)}
               />
             </Grid>
 
@@ -215,6 +216,7 @@ export default function Section1({
                 maxLength={350}
                 minRows={3}
                 placeholder="Short Description - Max 350 Characters"
+                onChange={(e) => setShortDesc(e.target.value)}
               />
             </Grid>
 
@@ -348,13 +350,14 @@ export default function Section1({
                 </Grid>
                 <Grid container item xs={12} direction="column">
                   <TextareaAutosize
-                    className="editable"
                     maxLength={1000}
                     minRows={3}
                     placeholder="Additional Publisher Notes- Max 1000 Characters"
                     label="Additional Publisher Notes"
                     sx={{ mb: 2 }}
                     className="editable"
+                    onChange={(e) => setShortDesc(e.target.value)}
+                    onChange={(e) => setPubNotes(e.target.value)}
                   />
                 </Grid>
               </Grid>

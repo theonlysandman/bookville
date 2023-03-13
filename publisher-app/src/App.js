@@ -8,16 +8,15 @@ import SearchError from "./components/SearchError";
 import {useNavigate} from "react-router-dom";
 import {Route, Routes} from "react-router-dom";
 import {Freehand} from "./Freehand";
-import {PublisherBrand} from "./PublisherBrand";
 import {BiblioshareAPI} from "./apis/BiblioshareAPI";
 
 import {useParams} from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// import placeholder from "./assets/bookville_logo.png";
-
 function App() {
+  var convert = require("xml-js");
+
   const [book, setBook] = useState("");
   const [ean, setEan] = useState("");
   // const [isEanVaild, setIsEanVaild] = useState(true);
@@ -25,10 +24,7 @@ function App() {
   const navigate = useNavigate();
 
   const {id} = useParams();
-  console.log("Know id?");
-  console.log(id);
-  var convert = require("xml-js");
-
+  
   const getBookDetails = (ean) => {
     console.log(ean);
     BiblioshareAPI.getBookDetails("he7ke8hocc4tds1b", ean)

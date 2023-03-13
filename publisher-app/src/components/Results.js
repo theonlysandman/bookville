@@ -20,6 +20,9 @@ export default function Result({getBookDetails, setEan, book}) {
   const {id} = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [splash, setSplash] = useState("");
+  const [shortDesc, setShortDesc] = useState("");
+  const [pubNotes, setPubNotes] = useState("");
 
   const [zoneCheckboxes, setzoneCheckboxes] = useState({
     zone1: false,
@@ -36,7 +39,6 @@ export default function Result({getBookDetails, setEan, book}) {
     zone4: false,
     zone5: false,
   });
-
 
   const navigate = useNavigate();
 
@@ -91,9 +93,7 @@ export default function Result({getBookDetails, setEan, book}) {
     <p>Publication Year: ${book?.PublicationDate?._text?.slice(0, 4)}</p>
     <p>Contributor: ${book?.Contributor?.PersonName?._text}</p>
     <p>Subject: ${book?.MainSubject?.SubjectHeadingText?._text}</p>
-    <p>Main Description: ${removeAngleBrackets(
-      book?.OtherText[0]?.Text?._text
-    )}</p>
+    <p>Main Description: ${book?.OtherText[0]?.Text?._text}</p>
    `;
 
     console.log("book ", book?.Title[0]?.TitleText._text);
@@ -108,6 +108,14 @@ export default function Result({getBookDetails, setEan, book}) {
       zone4Checkbox: zoneCheckboxes?.zone4,
       zone5Checkbox: zoneCheckboxes?.zone5,
       enrollmentCheckbox: zoneCheckboxes?.enrollment,
+      splash_line: splash,
+      short_desc: shortDesc,
+      pub_notes: pubNotes,
+      zone1DetailCheckbox: zoneDetailCheckboxes?.zone1,
+      zone2DetailCheckbox: zoneDetailCheckboxes?.zone2,
+      zone3DetailCheckbox: zoneDetailCheckboxes?.zone3,
+      zone4DetailCheckbox: zoneDetailCheckboxes?.zone4,
+      zone5DetailCheckbox: zoneDetailCheckboxes?.zone5,
     };
 
     // Send the email
@@ -138,6 +146,9 @@ export default function Result({getBookDetails, setEan, book}) {
             book={book}
             setzoneDetailCheckboxes={setzoneDetailCheckboxes}
             zoneDetailCheckboxes={zoneDetailCheckboxes}
+            setSplash={setSplash}
+            setShortDesc={setShortDesc}
+            setPubNotes={setPubNotes}
           />
           <Campaign
             book={book}
