@@ -79,7 +79,7 @@ export default function Section1({
                   // sx={{ mr: 4 }}
                   value={
                     book.hasOwnProperty("RecordReference")
-                      ? book?.RecordReference._text
+                      ? book?.RecordReference[0]._text
                       : ""
                   }
                 />
@@ -94,7 +94,7 @@ export default function Section1({
                   label="Title"
                   // sx={{ mr: 4 }}
                   value={
-                    book.hasOwnProperty("Title") ? book?.Title?.TitleText._text : "" 
+                    book.hasOwnProperty("Title") ? book?.Title[0]?.TitleText[0]._text : "" 
                   }
                 />
               </Grid>
@@ -110,7 +110,7 @@ export default function Section1({
                   // sx={{ mr: 4 }}
                   value={
                     book.hasOwnProperty("Subtitle")
-                      ? book?.Subtitle?._text
+                      ? book?.Subtitle[0]?._text
                       : ""
                   }
                 />
@@ -127,29 +127,51 @@ export default function Section1({
                   sx={{mr: 4}}
                   value={
                     book.hasOwnProperty("PublicationDate")
-                      ? book?.PublicationDate?._text?.slice(0, 4)
+                      ? book?.PublicationDate[0]?._text[0]?.slice(0, 4)
                       : ""
                   }
                 />
-                {/*<TextField label="Price" sx={{ mr: 4 }} value={*/}
-                {/*    book.hasOwnProperty("SupplyDetail")*/}
-                {/*        ? book?.SupplyDetail?.Price[0]*/}
-                {/*            ?.PriceAmount?._text*/}
-                {/*        : ""*/}
-                {/*} />*/}
+                <CustomDisableInput
+                  disabled
+                  label="Price"
+                  sx={{ mr: 4 }}
+                  value={
+                     book.hasOwnProperty("SupplyDetail")
+                        ? book?.SupplyDetail[0]?.Price[0]
+                            ?.PriceAmount[0]?._text[0]
+                        : ""
+                    }
+                />
               </Grid>
             </Grid>
 
             <Grid container item xs={12} direction="column">
               {/* Grid for contributor(s) and HomeTown to show in a single line  */}
               <Grid container item xs={12} direction="column">
-                <CustomDisableInputArea
+                <CustomDisableInput
                   disabled
-                  label="Contributor(s) Bio"
+                  label="Contributor(s)"
                   sx={{mr: 6}}
                   value={
                     book.hasOwnProperty("Contributor")
-                      ? removeHtmlTags(book?.Contributor?.BiographicalNote?._text)
+                      ? book?.Contributor[0].PersonName[0]._text
+                      : ""
+                  }
+                />
+                {/* <TextField label="HomeTown" sx={{ mr: 4 }} />*/}
+              </Grid>
+            </Grid>
+
+            <Grid container item xs={12} direction="column">
+              {/* Grid for contributor(s) and HomeTown to show in a single line  */}
+              <Grid container item xs={12} direction="column">
+                <CustomDisableInput
+                  disabled
+                  label="Contributor(s) Award"
+                  sx={{ mr: 6 }}
+                  value={
+                    book.hasOwnProperty("Prize")
+                      ?  book?.Prize[0].PrizeName[0]._text  
                       : ""
                   }
                 />
@@ -158,14 +180,13 @@ export default function Section1({
             </Grid>
 
 
-
             <Grid container item xs={6} direction="column">
               <CustomDisableInput
                 disabled
                 label="Subject (BISAC) "
                 value={
                   book.hasOwnProperty("MainSubject")
-                    ? book?.MainSubject?.SubjectHeadingText?._text
+                    ? book?.MainSubject[0]?.SubjectHeadingText[0]?._text
                     : "No data found"
                 }
               />
@@ -178,7 +199,7 @@ export default function Section1({
                 sx={{mb: 2}}
                 value={
                   book.hasOwnProperty("OtherText")
-                    ? removeHtmlTags(book.OtherText[0].Text._text)
+                    ? removeHtmlTags(book.OtherText[0].Text[0]._text[0])
                     : ""
                 }
               />

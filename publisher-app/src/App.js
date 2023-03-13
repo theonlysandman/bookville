@@ -29,18 +29,15 @@ function App() {
     console.log(ean);
     BiblioshareAPI.getBookDetails("he7ke8hocc4tds1b", ean)
       .then((res) => {
-        var book_json = convert.xml2json(res, {
-          compact: true,
-          spaces: 4,
-        });
-
+        var options = { compact: true, spaces: 4, alwaysArray: true  };
+        var book_json = convert.xml2json(res, options);
+        
         console.log("got JS response");
-
+   
         const book_json_parsed = JSON.parse(book_json);
 
         if (book_json_parsed.Product) {
-          console.log(book_json_parsed.Product.Title.TitleText);
-          setBook(book_json_parsed.Product);
+          setBook(book_json_parsed.Product[0]);
           setError("");
         } else {
           console.log("invalid EAN");
