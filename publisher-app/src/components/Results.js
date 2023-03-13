@@ -27,8 +27,16 @@ export default function Result({getBookDetails, setEan, book}) {
     zone3: false,
     zone4: false,
     zone5: false,
-    enrollment: false,
   });
+
+  const [zoneDetailCheckboxes, setzoneDetailCheckboxes] = useState({
+    zone1: false,
+    zone2: false,
+    zone3: false,
+    zone4: false,
+    zone5: false,
+  });
+
 
   const navigate = useNavigate();
 
@@ -126,7 +134,11 @@ export default function Result({getBookDetails, setEan, book}) {
       <div id="resultsPage">
         <form onSubmit={handleSubmit}>
           <LPGMembers book={book} setEmail={setEmail} setName={setName} />
-          <Section1 book={book} />
+          <Section1
+            book={book}
+            setzoneDetailCheckboxes={setzoneDetailCheckboxes}
+            zoneDetailCheckboxes={zoneDetailCheckboxes}
+          />
           <Campaign
             book={book}
             submitNomination={submitNomination}

@@ -5,33 +5,48 @@ import {
   FormControlLabel,
   FormGroup,
   Checkbox,
-  Divider,
 } from "@mui/material";
 import {Button} from "@mui/material";
 import {Box} from "@mui/system";
 
 export default function Campaign({
-  book,
   submitNomination,
   setzoneCheckboxes,
   zoneCheckboxes,
 }) {
   return (
     <div className="zones-section">
-
-
-      <Grid container direction="column">
-
-        {/* col 2 */}
+      <Box className="publisher">
+        <Box
+          sx={{
+            color: "white",
+            mt: 4,
+            mb: 2,
+            ml: "60px",
+          }}>
+            <Typography
+              variant="h5"
+              sx={{
+                color: "white",
+                backgroundColor: "#737373",
+                p: 2,
+                borderRadius: 1,
+                mb: 2,
+                textAlign: "left",
+              }}>
+            Zone Specific Enhancement 
+          </Typography>
+          <Grid container spacing={4} >
+            <Grid container item xs={12} direction="column" sx={{ pl: '40', color: '#000', }}>
+              You may also nominate this title for zone specific enhancement which includes dedicated digital ads and a larger profile in the print catalog. You may nominate for enhancement for multiple zones.
+            </Grid>
         <Grid
+              sx={{ pl: '40', color: '#000', }} 
           container
           item
           xs={12}
           align="center"
           direction="column"
-          //   sx={{
-          //     ml: 20,
-          //   }}
         >
           <FormGroup>
             <Grid
@@ -44,11 +59,8 @@ export default function Campaign({
                 control={
                   <Checkbox
                     sx={{
-                      borderRadius: "50%",
-                      //   "&.Mui-checked": {
-                      //     color: "#fff",
-                      //     backgroundColor: "#B31D0C",
-                      //   },
+                          borderRadius: "50%",
+                          backgroundColor: "#FFF"
                     }}
                     onChange={(e) =>
                       setzoneCheckboxes({
@@ -58,17 +70,14 @@ export default function Campaign({
                     }
                   />
                 }
-                label="Zone 1 - Rural Central Ontario"
+                label="Zone 1 - Yukon ($50)"
               />
               <FormControlLabel
                 control={
                   <Checkbox
                     sx={{
                       borderRadius: "50%",
-                      //   "&.Mui-checked": {
-                      //     color: "#fff",
-                      //     backgroundColor: "#B31D0C",
-                      //   },
+                      backgroundColor: "#FFF"
                     }}
                     onChange={(e) =>
                       setzoneCheckboxes({
@@ -78,17 +87,14 @@ export default function Campaign({
                     }
                   />
                 }
-                label="Zone 2 - Northern Alberta"
+                label="Zone 2 - Northern Alberta ($50)"
               />
               <FormControlLabel
                 control={
                   <Checkbox
                     sx={{
                       borderRadius: "50%",
-                      //   "&.Mui-checked": {
-                      //     color: "#fff",
-                      //     backgroundColor: "#B31D0C",
-                      //   },
+                      backgroundColor: "#FFF"
                     }}
                     onChange={(e) =>
                       setzoneCheckboxes({
@@ -98,7 +104,7 @@ export default function Campaign({
                     }
                   />
                 }
-                label="Zone 3 -Northern Saskatchewan"
+                label="Zone 3 - Prince Albert, SK ($50)"
               />
 
               <FormControlLabel
@@ -106,10 +112,7 @@ export default function Campaign({
                   <Checkbox
                     sx={{
                       borderRadius: "50%",
-                      //   "&.Mui-checked": {
-                      //     color: "#fff",
-                      //     backgroundColor: "#B31D0C",
-                      //   },
+                      backgroundColor: "#FFF"
                     }}
                     onChange={(e) =>
                       setzoneCheckboxes({
@@ -119,17 +122,14 @@ export default function Campaign({
                     }
                   />
                 }
-                label="Zone 4 - Rural Central Ontario"
+                label="Zone 4 - Georgina ON ($50)"
               />
               <FormControlLabel
                 control={
                   <Checkbox
                     sx={{
                       borderRadius: "50%",
-                      //   "&.Mui-checked": {
-                      //     // color: "#fff",
-                      //     // backgroundColor: "#B31D0C",
-                      //   },
+                      backgroundColor: "#FFF"
                     }}
                     onChange={(e) =>
                       setzoneCheckboxes({
@@ -139,59 +139,23 @@ export default function Campaign({
                     }
                   />
                 }
-                label="Zone 5 - Rural Newfoundland & Labrador"
+                label="Zone 5 - Northern Newfoundland & Labrador ($50)"
               />
             </Grid>
           </FormGroup>
-          {/*<Grid*/}
-          {/*  container*/}
-          {/*  alignItems="top"*/}
-          {/*  spacing={3}*/}
-          {/*  sx={{*/}
-          {/*    paddingLeft: "60px",*/}
-          {/*    //   width: "80%",*/}
-          {/*  }}>*/}
-          {/* col 1 */}
-          {/*<Grid item xs={6}>*/}
-          {/*  <Typography*/}
-          {/*    variant="h6"*/}
-          {/*    align="left"*/}
-          {/*    sx={{*/}
-          {/*      color: "#B31D0C",*/}
-          {/*      fontWeight: "bold",*/}
-          {/*    }}>*/}
-          {/*    Campaign Enrollment*/}
-          {/*  </Typography>*/}
-          {/*  <Typography variant="h6" align="left">*/}
-          {/*    All Zones*/}
-          {/*  </Typography>*/}
 
-          {/*  <FormControlLabel*/}
-          {/*    control={*/}
-          {/*      <Checkbox*/}
-          {/*        sx={{*/}
-          {/*          borderRadius: "50%",*/}
-          {/*          //   "&.Mui-checked": {*/}
-          {/*          //     color: "#fff",*/}
-          {/*          //     backgroundColor: "#B31D0C",*/}
-          {/*          //   },*/}
-          {/*        }}*/}
-          {/*        onChange={(e) =>*/}
-          {/*          setzoneCheckboxes({*/}
-          {/*            ...zoneCheckboxes,*/}
-          {/*            enrollment: e.target.checked,*/}
-          {/*          })*/}
-          {/*        }*/}
-          {/*      />*/}
-          {/*    }*/}
-          {/*    shape="rounded"*/}
-          {/*    label="$80"*/}
-          {/*    // labelPlacement="bottom"*/}
-          {/*  />*/}
-          {/*</Grid>*/}
+      </Grid>
+          </Grid>
+
+        </Box>
+      </Box>
 
 
-        </Grid>
+      <Grid container direction="column">
+
+
+
+     
       </Grid>
       <Box
         sx={{

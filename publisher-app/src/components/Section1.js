@@ -5,18 +5,15 @@ import { Checkbox, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import "../App.css";
 
-export default function Section1({book}) {
+export default function Section1({
+  book,
+  setzoneDetailCheckboxes,
+  zoneDetailCheckboxes,
+}) {
   function removeAngleBrackets(str) {
-    var str1 = str.replace(/&lt;p&gt;/g, "");
-    var str2 = str1.replace(/&lt;strong&gt;/g, "");
-    var str3 = str2.replace(/&lt;\/strong&gt;/g, "");
-    var str4 = str3.replace(/&lt;\/p&gt;/g, "");
-    var str5 = str4.replace(/&lt;br&gt;/g, "");
-    var str6 = str5.replace(/&lt;\/?em&gt;/g, "");
-    var str7 = str6.replace(/&lt;\/b&gt;/g, "");
-    var str8 = str7.replace(/&lt;b&gt;/g, "");
 
-    return str8;
+    return str.replace(/&lt;.*?&gt;/g, "");
+
   }
 
  
@@ -70,12 +67,12 @@ export default function Section1({book}) {
           Here is the information we found related to your title.
         </Typography>
 
-        <Box class="form-section">
-          <Grid container spacing={4}>
 
-            <Grid container item direction="column">
+        <Box class="form-section">
+          <Grid container spacing={4} >
+
+            <Grid container item xs={6} direction="column">
               {/* grid to show the ISBN, Pub Year and Price in a row */}
-              <Grid container item xs={12} direction="row">
                 <CustomDisableInput
                   disabled
                   label="ISBN"
@@ -86,12 +83,12 @@ export default function Section1({book}) {
                       : ""
                   }
                 />
-              </Grid>
+            </Grid>
+            <Grid container item xs={6} direction="column">
             </Grid>
 
-            <Grid container item direction="column">
               {/* grid to show the ISBN, Pub Year and Price in a row */}
-              <Grid container item xs={12} direction="row">
+              <Grid container item xs={6} direction="column">
                 <CustomDisableInput
                   disabled
                   label="Title"
@@ -101,11 +98,12 @@ export default function Section1({book}) {
                   }
                 />
               </Grid>
+            <Grid container item xs={6} direction="column">
             </Grid>
 
             <Grid container item direction="column">
               {/* grid to show the ISBN, Pub Year and Price in a row */}
-              <Grid container item xs={12} direction="row">
+              <Grid container item xs={6} direction="column">
                 <CustomDisableInput
                   disabled
                   label="Subtitle"
@@ -144,20 +142,22 @@ export default function Section1({book}) {
 
             <Grid container item xs={12} direction="column">
               {/* Grid for contributor(s) and HomeTown to show in a single line  */}
-              <Grid container item xs={12} direction="row">
-                <CustomDisableInput
+              <Grid container item xs={12} direction="column">
+                <CustomDisableInputArea
                   disabled
-                  label="Contributor(s)"
+                  label="Contributor(s) Bio"
                   sx={{mr: 6}}
                   value={
                     book.hasOwnProperty("Contributor")
-                      ? book?.Contributor?.PersonName?._text
+                      ? removeAngleBrackets(book?.Contributor?.BiographicalNote?._text)
                       : ""
                   }
                 />
                 {/* <TextField label="HomeTown" sx={{ mr: 4 }} />*/}
               </Grid>
             </Grid>
+
+
 
             <Grid container item xs={6} direction="column">
               <CustomDisableInput
@@ -195,7 +195,7 @@ export default function Section1({book}) {
                   mb: 2,
                   textAlign: "left",
                 }}>
-                Please complete this section.
+                Please provide us with a little more information about your title.
               </Typography>
             </Grid>
 
@@ -203,17 +203,21 @@ export default function Section1({book}) {
               <TextField
                 required
                 className="editable"
-                label="Short Description"
+                label="Splash Line - Max 100 Characters"
+                inputProps={{ maxLength: 100 }}
               />
             </Grid>
 
             <Grid container item xs={12} direction="column">
-              <TextField
-                label="Additional Publisher Notes"
-                sx={{mb: 2}}
+              <TextareaAutosize
                 className="editable"
+                label="Short Description  - Max 350 Characters"
+                maxLength={350}
+                minRows={3}
+                placeholder="Short Description - Max 350 Characters"
               />
             </Grid>
+
           </Grid>
         </Box>
 
@@ -223,6 +227,141 @@ export default function Section1({book}) {
             width: "90%",
             color: "black",
           }}>
+
+
+          <Box className="publisher">
+            <Box
+              sx={{
+                width: "90%",
+                color: "white",
+                mt: 4,
+                mb: 2,
+              }}>
+              <Grid container spacing={4} >
+                <Grid container item xs={12} direction="column" sx={{ pl: '40', color: '#000', }}>
+                  Please select relevant zones and explain the relevance in the Additional Publisher Notes section below.
+                </Grid>
+                <Grid
+                  sx={{ pl: '40', color: '#000', }}
+                  container
+                  item
+                  xs={12}
+                  align="center"
+                  direction="column"
+                >
+                  <FormGroup>
+                    <Grid
+                      container
+                      xs={12}
+                      itemAlign="center"
+                      direction="column"
+                    >
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            sx={{
+                              borderRadius: "50%",
+                              backgroundColor: "#FFF"
+                            }}
+                            onChange={(e) =>
+                              setzoneDetailCheckboxes({
+                                ...zoneDetailCheckboxes,
+                                zone1: e.target.checked,
+                              })
+                            }
+                          />
+                        }
+                        label="Zone 1 - Has Yukon Relevance"
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            sx={{
+                              borderRadius: "50%",
+                              backgroundColor: "#FFF"
+                            }}
+                            onChange={(e) =>
+                              setzoneDetailCheckboxes({
+                                ...zoneDetailCheckboxes,
+                                zone2: e.target.checked,
+                              })
+                            }
+                          />
+                        }
+                        label="Zone 2 - Has Northern Alberta Relevance"
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            sx={{
+                              borderRadius: "50%",
+                              backgroundColor: "#FFF"
+                            }}
+                            onChange={(e) =>
+                              setzoneDetailCheckboxes({
+                                ...zoneDetailCheckboxes,
+                                zone3: e.target.checked,
+                              })
+                            }
+                          />
+                        }
+                        label="Zone 3 - Has Prince Albert, SK "
+                      />
+
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            sx={{
+                              borderRadius: "50%",
+                              backgroundColor: "#FFF"
+                            }}
+                            onChange={(e) =>
+                              setzoneDetailCheckboxes({
+                                ...zoneDetailCheckboxes,
+                                zone4: e.target.checked,
+                              })
+                            }
+                          />
+                        }
+                        label="Zone 4 - Has Georgina ON "
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            sx={{
+                              borderRadius: "50%",
+                              backgroundColor: "#FFF"
+                            }}
+                            onChange={(e) =>
+                              setzoneDetailCheckboxes({
+                                ...zoneDetailCheckboxes,
+                                zone5: e.target.checked,
+                              })
+                            }
+                          />
+                        }
+                        label="Zone 5 - Has Northern Newfoundland & Labrador Relevance"
+                      />
+                    </Grid>
+                  </FormGroup>
+
+                </Grid>
+                <Grid container item xs={12} direction="column">
+                  <TextareaAutosize
+                    className="editable"
+                    maxLength={1000}
+                    minRows={3}
+                    placeholder="Additional Publisher Notes- Max 1000 Characters"
+                    label="Additional Publisher Notes"
+                    sx={{ mb: 2 }}
+                    className="editable"
+                  />
+                </Grid>
+              </Grid>
+
+            </Box>
+          </Box>
+
           <Grid
             container
             spacing={4}
@@ -231,7 +370,6 @@ export default function Section1({book}) {
               mt: 4,
               ml: 2,
             }}>
-            <div>
               <Grid container item xs={12} direction="column">
                 {/*  <Typography variant="h6" sx={{ mb: 1 }}>*/}
                 {/*      Additional Location Relevance*/}
@@ -271,7 +409,6 @@ export default function Section1({book}) {
                 {/*      label="Subject"*/}
                 {/*  />*/}
               </Grid>
-            </div>
           </Grid>
         </Box>
 
