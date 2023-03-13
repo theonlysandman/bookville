@@ -109,8 +109,8 @@ export default function Section1({
                   label="Subtitle"
                   // sx={{ mr: 4 }}
                   value={
-                    book.hasOwnProperty("Subtitle")
-                      ? book?.Subtitle[0]?._text
+                    book.hasOwnProperty("Title")
+                      ? book?.Title[0].Subtitle[0]?._text
                       : ""
                   }
                 />
