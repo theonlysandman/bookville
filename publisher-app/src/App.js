@@ -19,7 +19,6 @@ function App() {
 
   const [book, setBook] = useState("");
   const [ean, setEan] = useState("");
-  // const [isEanVaild, setIsEanVaild] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -30,12 +29,8 @@ function App() {
     BiblioshareAPI.getBookDetails("he7ke8hocc4tds1b", ean)
       .then((res) => {
         var options = { compact: true, spaces: 4, alwaysArray: true  };
-        var book_json = convert.xml2json(res, options);
-        
-        console.log("got JS response");
-   
-        const book_json_parsed = JSON.parse(book_json);
-
+        const book_json_parsed = JSON.parse(convert.xml2json(res, options));
+          
         if (book_json_parsed.Product) {
           setBook(book_json_parsed.Product[0]);
           setError("");

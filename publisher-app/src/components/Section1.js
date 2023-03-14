@@ -16,8 +16,29 @@ export default function Section1({
 }) {
 
   function removeHtmlTags(str) {
-    return str.replace(/&lt;.*?&gt;/g, "");
+    return str.replace(/&lt;.*?&gt;/g, "").trim();
   }
+
+  function getContributorBio() {
+    if (book.hasOwnProperty("Contributor")) {
+      if (book.Contributor[0].hasOwnProperty("BiographicalNote")) {
+        return removeHtmlTags(book.Contributor[0].BiographicalNote[0]._text[0]);
+      } else {
+        return "No Data Found";
+      }
+    }
+  }
+
+  function getSubtitle() {
+    if (book.hasOwnProperty("Title")) {
+      if (book.Title[0].hasOwnProperty("Subtitle")) {
+        return book.Title[0].Subtitle[0]._text[0];
+      } else {
+        return "";
+      }
+    }
+  }
+
 
   const styles = theme => ({
     input: {
@@ -108,8 +129,8 @@ export default function Section1({
                   label="Subtitle"
                   value={
                     book.hasOwnProperty("Title") 
-                      ? book?.Title[0]?.Subtitle[0]?._text
-                      : "else"
+                      ? getSubtitle() //book?.Title[0]?.Subtitle[0]?._text
+                      : ""
                   }
                 />
               </Grid>
@@ -192,7 +213,7 @@ export default function Section1({
                 sx={{ mb: 2 }}
                 value={
                   book.hasOwnProperty("Contributor")
-                    ? book.Contributor[0].BiographicalNote[0]._text
+                    ? getContributorBio() //book.Contributor[0].BiographicalNote[0]._text
                     : ""
                 }
               />
