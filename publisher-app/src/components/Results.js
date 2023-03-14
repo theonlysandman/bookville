@@ -85,23 +85,13 @@ export default function Result({getBookDetails, setEan, book}) {
 
     // Construct the email subject and body
     const emailSubject = `LPG Book Nomination: ${book?.Title[0]?.TitleText._text}`;
-    const emailBody = `
-    <p>Publisher Name: ${book?.Publisher?.PublisherName?._text}</p>
-    <p>Imprint Name: ${book?.Imprint?.ImprintName?._text}</p>
-    <p>ISBN: ${book?.RecordReference._text}</p>
-    <p>Price: ${book?.SupplyDetail?.Price[0]?.PriceAmount?._text}</p>
-    <p>Publication Year: ${book?.PublicationDate?._text?.slice(0, 4)}</p>
-    <p>Contributor: ${book?.Contributor?.PersonName?._text}</p>
-    <p>Subject: ${book?.MainSubject?.SubjectHeadingText?._text}</p>
-    <p>Main Description: ${book?.OtherText[0]?.Text?._text}</p>
-   `;
-
+    
     console.log("book ", book?.Title[0]?.TitleText._text);
     const templateParams = {
       name: name,
       email: email,
       subject: emailSubject,
-      book_title: book?.Title?.TitleText._text,
+      book_title: book?.Title[0]?.TitleText[0]._text,
       zone1Checkbox: zoneCheckboxes?.zone1,
       zone2Checkbox: zoneCheckboxes?.zone2,
       zone3Checkbox: zoneCheckboxes?.zone3,
