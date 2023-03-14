@@ -32,7 +32,7 @@ export default function LPGMembers({book, setEmail, setName}) {
           Welcome{" "}
           <b>
             {book.hasOwnProperty("Publisher")
-              ? book?.Publisher?.PublisherName?._text
+              ? book?.Publisher[0]?.PublisherName[0]?._text
               : ""}{" "}
           </b>
           as a LPG member you may nominate up to 5 titles for enrolment in the

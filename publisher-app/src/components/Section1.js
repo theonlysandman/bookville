@@ -4,6 +4,7 @@ import {FormControlLabel, FormGroup} from "@mui/material";
 import { Checkbox, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import "../App.css";
+import Textarea from '@mui/joy/Textarea';
 
 export default function Section1({
   book,
@@ -76,7 +77,6 @@ export default function Section1({
                 <CustomDisableInput
                   disabled
                   label="ISBN"
-                  // sx={{ mr: 4 }}
                   value={
                     book.hasOwnProperty("RecordReference")
                       ? book?.RecordReference[0]._text
@@ -92,7 +92,6 @@ export default function Section1({
                 <CustomDisableInput
                   disabled
                   label="Title"
-                  // sx={{ mr: 4 }}
                   value={
                     book.hasOwnProperty("Title") ? book?.Title[0]?.TitleText[0]._text : "" 
                   }
@@ -107,11 +106,10 @@ export default function Section1({
                 <CustomDisableInput
                   disabled
                   label="Subtitle"
-                  // sx={{ mr: 4 }}
                   value={
-                    book.hasOwnProperty("Subtitle")
+                    book.hasOwnProperty("Title") 
                       ? book?.Title[0]?.Subtitle[0]?._text
-                      : ""
+                      : "else"
                   }
                 />
               </Grid>
@@ -162,24 +160,6 @@ export default function Section1({
               </Grid>
             </Grid>
 
-            <Grid container item xs={12} direction="column">
-              {/* Grid for contributor(s) and HomeTown to show in a single line  */}
-              <Grid container item xs={12} direction="column">
-                <CustomDisableInput
-                  disabled
-                  label="Contributor(s) Award"
-                  sx={{ mr: 6 }}
-                  value={
-                    book.hasOwnProperty("Prize")
-                      ?  book?.Prize[0].PrizeName[0]._text  
-                      : ""
-                  }
-                />
-                {/* <TextField label="HomeTown" sx={{ mr: 4 }} />*/}
-              </Grid>
-            </Grid>
-
-
             <Grid container item xs={6} direction="column">
               <CustomDisableInput
                 disabled
@@ -196,7 +176,7 @@ export default function Section1({
               <CustomDisableInputArea
                 disabled
                 label="Main Description"
-                sx={{mb: 2}}
+                sx={{ mb: 2 }}
                 value={
                   book.hasOwnProperty("OtherText")
                     ? removeHtmlTags(book.OtherText[0].Text[0]._text[0])
@@ -204,6 +184,38 @@ export default function Section1({
                 }
               />
             </Grid>
+
+            <Grid container item xs={12} direction="column">
+              <CustomDisableInputArea
+                disabled
+                label="Main Description"
+                sx={{ mb: 2 }}
+                value={
+                  book.hasOwnProperty("Contributor")
+                    ? book.Contributor[0].BiographicalNote[0]._text
+                    : ""
+                }
+              />
+            </Grid>
+
+
+            <Grid container item xs={12} direction="column">
+              {/* Grid for contributor(s) and HomeTown to show in a single line  */}
+              <Grid container item xs={12} direction="column">
+                <CustomDisableInput
+                  disabled
+                  label="Award"
+                  sx={{ mr: 6 }}
+                  value={
+                    book.hasOwnProperty("Prize")
+                      ?  book?.Prize[0].PrizeName[0]._text  
+                      : ""
+                  }
+                />
+                {/* <TextField label="HomeTown" sx={{ mr: 4 }} />*/}
+              </Grid>
+            </Grid>
+
 
             <Grid container item xs={12} direction="column">
               <Typography
@@ -328,7 +340,7 @@ export default function Section1({
                             }
                           />
                         }
-                        label="Zone 3 - Has Prince Albert, SK "
+                        label="Zone 3 - Has Prince Albert, SK Relevance"
                       />
 
                       <FormControlLabel
@@ -346,7 +358,7 @@ export default function Section1({
                             }
                           />
                         }
-                        label="Zone 4 - Has Georgina ON "
+                        label="Zone 4 - Has Georgina ON Relevance"
                       />
                       <FormControlLabel
                         control={
